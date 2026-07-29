@@ -8,31 +8,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ─── Brand Palette ──────────────────────────────────────────────
+        // ─── Brand Palette (Indigo) ─────────────────────────────────────
         brand: {
-          50 : '#f0f4ff',
-          100: '#e0e9ff',
-          200: '#c7d7fe',
-          300: '#a5b9fc',
-          400: '#8196f8',
-          500: '#6675f1',
-          600: '#5a54e5',
-          700: '#4d44cb',
-          800: '#3f39a4',
-          900: '#373582',
-          950: '#21204c',
+          50 : '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
         },
-        // ─── Accent (Gold / Emerald) ────────────────────────────────────
+        // ─── Accent Colors ──────────────────────────────────────────────
         accent: {
-          gold   : '#f59e0b',
-          emerald: '#10b981',
-          rose   : '#f43f5e',
-          violet : '#8b5cf6',
-          cyan   : '#06b6d4',
+          gold   : '#d97706',
+          emerald: '#059669',
+          rose   : '#dc2626',
+          violet : '#7c3aed',
+          cyan   : '#0891b2',
         },
-        // ─── Dark Theme Surfaces ─────────────────────────────────────────
+        // ─── Light Surface Colors ────────────────────────────────────────
         dark: {
-          50 : '#f8fafc',
+          50 : '#f8faff',
           100: '#f1f5f9',
           200: '#e2e8f0',
           700: '#334155',
@@ -41,10 +41,12 @@ export default {
           900: '#0f172a',
           950: '#020617',
         },
-        // ─── Glass Surface ────────────────────────────────────────────────
-        glass: {
-          border: 'rgba(255,255,255,0.1)',
-          bg    : 'rgba(255,255,255,0.05)',
+        // ─── Surface utilities ───────────────────────────────────────────
+        surface: {
+          page   : '#f8faff',
+          sidebar: '#ffffff',
+          card   : '#ffffff',
+          muted  : '#f1f5f9',
         },
       },
       fontFamily: {
@@ -76,14 +78,14 @@ export default {
         'sidebar-gradient'  : 'linear-gradient(180deg, #0f172a 0%, #1a1f35 100%)',
       },
       boxShadow: {
-        'glass'      : '0 8px 32px rgba(31, 38, 135, 0.37)',
-        'glass-lg'   : '0 25px 50px rgba(31, 38, 135, 0.25)',
-        'glow'       : '0 0 20px rgba(102, 126, 234, 0.5)',
-        'glow-green' : '0 0 20px rgba(16, 185, 129, 0.5)',
-        'glow-red'   : '0 0 20px rgba(244, 63, 94, 0.5)',
-        'card'       : '0 4px 24px rgba(0, 0, 0, 0.2)',
-        'card-hover' : '0 12px 40px rgba(0, 0, 0, 0.35)',
-        'inner-glow' : 'inset 0 0 20px rgba(102, 126, 234, 0.1)',
+        'card'       : '0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06)',
+        'card-hover' : '0 4px 12px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.08)',
+        'glass'      : '0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(79,70,229,0.06)',
+        'glass-lg'   : '0 8px 32px rgba(79,70,229,0.1)',
+        'glow'       : '0 0 20px rgba(79, 70, 229, 0.3)',
+        'glow-green' : '0 0 20px rgba(5, 150, 105, 0.3)',
+        'glow-red'   : '0 0 20px rgba(220, 38, 38, 0.3)',
+        'inner-glow' : 'inset 0 0 20px rgba(79, 70, 229, 0.05)',
       },
       backdropBlur: {
         'xs': '2px',

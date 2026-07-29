@@ -1,478 +1,390 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
-  TrendingUp, Brain, Shield, Target, BarChart3, Zap, Star, ArrowRight,
-  ChevronRight, Sparkles, Bot, LineChart, PieChart, Bell, FileText,
-  CheckCircle2, Play, Globe, Users, Award, DollarSign
+  TrendingUp, Brain, Shield, Target, Bot, FileText,
+  CheckCircle2, ArrowRight, Sparkles, BarChart3, Bell,
+  Users, Award, Zap, LineChart, PieChart, Star
 } from 'lucide-react';
-import AnimatedBackground from '@/components/AnimatedBackground';
 import TickerTape from '@/components/ui/TickerTape';
 
-// ── Feature Data ────────────────────────────────────────────────────────────
+// ── Feature tiles ────────────────────────────────────────────────────────────
 const features = [
   {
-    icon : <Brain className="w-6 h-6" />,
+    icon: Brain,
     title: 'AI Portfolio Analysis',
-    desc : 'Get a complete 360° health check of your portfolio powered by GPT-4. Uncover hidden risks, opportunities, and actionable insights in seconds.',
-    color: 'from-violet-500/20 to-purple-600/10',
-    border: 'border-violet-500/20',
-    iconBg: 'bg-violet-500/10 text-violet-400',
+    desc: 'Get a complete health check of your portfolio powered by AI. Uncover risks, opportunities, and insights in seconds.',
+    iconBg: 'bg-indigo-50',
+    iconColor: 'text-indigo-600',
   },
   {
-    icon : <TrendingUp className="w-6 h-6" />,
+    icon: TrendingUp,
     title: 'Buy / Hold / Sell Engine',
-    desc : 'AI-powered recommendations for every stock in your portfolio, backed by fundamental analysis, technical indicators, and real-time sentiment.',
-    color: 'from-emerald-500/20 to-teal-600/10',
-    border: 'border-emerald-500/20',
-    iconBg: 'bg-emerald-500/10 text-emerald-400',
+    desc: 'AI-powered recommendations backed by fundamentals, technical indicators, and real-time market sentiment.',
+    iconBg: 'bg-emerald-50',
+    iconColor: 'text-emerald-600',
   },
   {
-    icon : <Shield className="w-6 h-6" />,
-    title: 'AI Risk Assessment',
-    desc : 'Know exactly how risky your portfolio is. Stress-test against market crashes, measure VaR, and get a one-click risk reduction plan.',
-    color: 'from-rose-500/20 to-orange-600/10',
-    border: 'border-rose-500/20',
-    iconBg: 'bg-rose-500/10 text-rose-400',
+    icon: Shield,
+    title: 'Risk Assessment',
+    desc: 'Stress-test your portfolio against market crashes, measure VaR, and get a one-click risk reduction plan.',
+    iconBg: 'bg-rose-50',
+    iconColor: 'text-rose-600',
   },
   {
-    icon : <Target className="w-6 h-6" />,
+    icon: Target,
     title: 'Goal-Based Planning',
-    desc : 'Set financial goals — retirement, education, home — and get a personalized SIP plan with milestone tracking and AI-driven course corrections.',
-    color: 'from-amber-500/20 to-yellow-600/10',
-    border: 'border-amber-500/20',
-    iconBg: 'bg-amber-500/10 text-amber-400',
+    desc: 'Set financial goals — retirement, education, home — and get a personalized SIP plan with AI course corrections.',
+    iconBg: 'bg-amber-50',
+    iconColor: 'text-amber-600',
   },
   {
-    icon : <Bot className="w-6 h-6" />,
+    icon: Bot,
     title: 'AI Financial Coach',
-    desc : 'Chat with your 24/7 AI financial advisor. Get expert answers to "Should I invest in gold?" or "How do I beat inflation?" — tailored to your portfolio.',
-    color: 'from-cyan-500/20 to-blue-600/10',
-    border: 'border-cyan-500/20',
-    iconBg: 'bg-cyan-500/10 text-cyan-400',
+    desc: 'Chat with your 24/7 AI advisor. Get expert answers tailored to your own portfolio, anytime.',
+    iconBg: 'bg-sky-50',
+    iconColor: 'text-sky-600',
   },
   {
-    icon : <FileText className="w-6 h-6" />,
-    title: 'AI Weekly Reports',
-    desc : 'Receive automatically generated PDF reports every week — performance analysis, market digest, and next-week action items, all in one beautiful document.',
-    color: 'from-indigo-500/20 to-violet-600/10',
-    border: 'border-indigo-500/20',
-    iconBg: 'bg-indigo-500/10 text-indigo-400',
+    icon: FileText,
+    title: 'Weekly AI Reports',
+    desc: 'Auto-generated PDF reports every week — performance analysis, market digest, and next-week action items.',
+    iconBg: 'bg-violet-50',
+    iconColor: 'text-violet-600',
   },
-];
-
-const stats = [
-  { label: 'Portfolios Analyzed', value: '50,000+', icon: <PieChart className="w-5 h-5" /> },
-  { label: 'AI Recommendations', value: '2.5M+',   icon: <Brain className="w-5 h-5" /> },
-  { label: 'Avg Return Boost',    value: '+18%',    icon: <TrendingUp className="w-5 h-5" /> },
-  { label: 'Happy Investors',     value: '12,000+', icon: <Users className="w-5 h-5" /> },
 ];
 
 const testimonials = [
   {
-    name  : 'Priya Sharma',
-    role  : 'Software Engineer',
-    image : 'PS',
-    rating: 5,
-    text  : 'InvestIQ AI completely transformed how I manage my portfolio. The AI chat advisor is like having a personal financial planner available 24/7. My returns improved by 22% in 6 months!',
+    name: 'Priya Sharma',
+    role: 'Software Engineer',
+    text: '"InvestIQ AI completely transformed how I manage my portfolio. The AI chat is like having a personal financial planner available 24/7. My returns improved by 22% in 6 months!"',
+    initials: 'PS',
   },
   {
-    name  : 'Rahul Verma',
-    role  : 'Startup Founder',
-    image : 'RV',
-    rating: 5,
-    text  : 'The risk analysis feature is incredible. It caught a dangerous concentration in my portfolio that I completely missed. The one-click risk reduction plan saved me from a significant loss.',
+    name: 'Rahul Verma',
+    role: 'Startup Founder',
+    text: '"The risk analysis feature is incredible. It caught a dangerous concentration in my portfolio that I completely missed. The one-click risk reduction plan saved me from a significant loss."',
+    initials: 'RV',
   },
   {
-    name  : 'Anita Patel',
-    role  : 'Doctor & Investor',
-    image : 'AP',
-    rating: 5,
-    text  : 'As a busy professional, I needed something that could give me expert advice without spending hours on research. InvestIQ AI delivers exactly that — intelligent insights in seconds.',
+    name: 'Anita Patel',
+    role: 'Doctor & Investor',
+    text: '"As a busy professional, I needed something that could give me expert advice without spending hours on research. InvestIQ AI delivers exactly that — intelligent insights in seconds."',
+    initials: 'AP',
   },
 ];
 
-const navItems = [
-  { label: 'Features',    href: '#features'    },
-  { label: 'How it Works', href: '#how-it-works' },
-  { label: 'Pricing',     href: '#pricing'      },
-  { label: 'About',       href: '#about'        },
+const stats = [
+  { label: 'Investors', value: '12,000+', icon: Users },
+  { label: 'AUM Tracked', value: '₹850 Cr+', icon: BarChart3 },
+  { label: 'AI Insights Daily', value: '50,000+', icon: Sparkles },
+  { label: 'Avg Returns Boost', value: '+18%', icon: TrendingUp },
 ];
 
-// ── Animated Counter ─────────────────────────────────────────────────────────
-const CountUp = ({ target, suffix = '' }: { target: string; suffix?: string }) => {
-  return <span className="font-bold font-display">{target}{suffix}</span>;
-};
-
-// ── Particle Background ───────────────────────────────────────────────────────
-const ParticleField = () => {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    id  : i,
-    x   : Math.random() * 100,
-    y   : Math.random() * 100,
-    size: Math.random() * 3 + 1,
-    delay: Math.random() * 5,
-    dur : Math.random() * 10 + 10,
-  }));
-
+// ── Mini mock dashboard preview ──────────────────────────────────────────────
+const DashboardPreview = () => {
+  const [price, setPrice] = useState(1307.8);
+  useEffect(() => {
+    const t = setInterval(() => setPrice(p => parseFloat((p + (Math.random() - 0.48) * 3).toFixed(2))), 2000);
+    return () => clearInterval(t);
+  }, []);
+  const stocks = [
+    { s: 'RELIANCE', p: price, c: +0.5 },
+    { s: 'TCS', p: 2069.45, c: -0.32 },
+    { s: 'INFY', p: 1068.2, c: +1.12 },
+    { s: 'HDFCBANK', p: 824.95, c: -0.18 },
+  ];
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-brand-400/20"
-          style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size }}
-          animate={{ y: [0, -30, 0], opacity: [0.2, 0.8, 0.2] }}
-          transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      ))}
+    <div className="bg-white rounded-2xl border border-slate-100 shadow-xl overflow-hidden">
+      {/* Dashboard header */}
+      <div className="bg-indigo-600 px-4 py-3 flex items-center gap-2">
+        <div className="w-3 h-3 rounded-full bg-white/30" />
+        <div className="w-3 h-3 rounded-full bg-white/30" />
+        <div className="w-3 h-3 rounded-full bg-white/30" />
+        <span className="ml-2 text-white text-xs font-medium opacity-80">InvestIQ AI — Dashboard</span>
+      </div>
+      {/* Content */}
+      <div className="p-4 space-y-3">
+        {/* Portfolio value */}
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-3">
+          <div className="text-xs text-slate-500 font-medium">Portfolio Value</div>
+          <div className="text-xl font-black text-slate-900 font-numeric mt-0.5">₹8,42,350.00</div>
+          <div className="text-xs text-emerald-600 font-semibold">▲ +₹12,420 (+1.50%) today</div>
+        </div>
+        {/* Chart placeholder */}
+        <div className="h-16 bg-gradient-to-r from-indigo-100 to-indigo-50 rounded-xl flex items-end px-2 pb-1 gap-0.5">
+          {[40, 55, 45, 70, 60, 75, 65, 80, 72, 88, 78, 92, 85, 95].map((h, i) => (
+            <div key={i} className="flex-1 rounded-sm bg-indigo-400 opacity-70 transition-all" style={{ height: `${h}%` }} />
+          ))}
+        </div>
+        {/* Stock list */}
+        <div className="space-y-1.5">
+          {stocks.map(s => (
+            <div key={s.s} className="flex items-center justify-between py-1">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded bg-indigo-100 flex items-center justify-center text-2xs font-bold text-indigo-600">
+                  {s.s[0]}
+                </div>
+                <span className="text-xs font-semibold text-slate-700">{s.s}</span>
+              </div>
+              <div className="text-right">
+                <div className="text-xs font-bold text-slate-900 font-numeric">₹{s.p.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                <div className={`text-2xs font-semibold ${s.c >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                  {s.c >= 0 ? '▲' : '▼'} {Math.abs(s.c)}%
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-// ── Main Landing Page ─────────────────────────────────────────────────────────
 export default function LandingPage() {
-  const [scrolled,  setScrolled]  = useState(false);
-  const [menuOpen,  setMenuOpen]  = useState(false);
-  const [activeTab, setActiveTab] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-transparent overflow-x-hidden relative">
-      <AnimatedBackground />
+    <div className="min-h-screen bg-white" style={{ fontFamily: 'Inter, sans-serif' }}>
 
-      {/* ── Navbar ────────────────────────────────────────────────────────── */}
-      <div className="fixed top-0 left-0 right-0 z-[60]">
-        <TickerTape />
-      </div>
-      
-      <motion.nav
-        className={`fixed top-10 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'glass-dark border-b border-white/5 shadow-lg' : 'bg-transparent'
-        }`}
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      {/* ── Ticker Tape ── */}
+      <TickerTape />
+
+      {/* ── Navbar ── */}
+      <nav className="sticky top-0 z-50 bg-white border-b border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center h-16 gap-8">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center shadow-glow group-hover:shadow-glow transition-all">
-              <TrendingUp className="w-5 h-5 text-white" />
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center shadow-sm">
+              <TrendingUp className="w-4 h-4 text-white" />
             </div>
-            <span className="text-xl font-bold font-display gradient-text">InvestIQ AI</span>
+            <span className="font-black text-indigo-600 text-base" style={{ fontFamily: 'Outfit, sans-serif' }}>InvestIQ AI</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a key={item.label} href={item.href}
-                className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
-                {item.label}
-              </a>
-            ))}
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 flex-1">
+            <a href="#features" className="hover:text-indigo-600 transition-colors">Features</a>
+            <a href="#how" className="hover:text-indigo-600 transition-colors">How it Works</a>
+            <a href="#testimonials" className="hover:text-indigo-600 transition-colors">Reviews</a>
+            <a href="#pricing" className="hover:text-indigo-600 transition-colors">Pricing</a>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link to="/login" className="btn-secondary text-sm px-4 py-2">Sign In</Link>
-            <Link to="/register" className="btn-primary text-sm px-4 py-2">
-              Get Started Free <ArrowRight className="w-4 h-4" />
+          <div className="flex items-center gap-3 ml-auto">
+            <Link to="/login" className="hidden md:block text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors px-4 py-2">
+              Sign In
+            </Link>
+            <Link to="/register" className="btn-primary text-sm px-5 py-2.5">
+              Get Started Free →
             </Link>
           </div>
-
-          {/* Mobile menu toggle */}
-          <button className="md:hidden btn-icon" onClick={() => setMenuOpen(!menuOpen)}>
-            <div className="space-y-1.5">
-              <span className={`block h-0.5 w-5 bg-slate-300 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-              <span className={`block h-0.5 w-5 bg-slate-300 transition-all ${menuOpen ? 'opacity-0' : ''}`} />
-              <span className={`block h-0.5 w-5 bg-slate-300 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-            </div>
-          </button>
         </div>
+      </nav>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden glass-dark border-t border-white/5 px-6 py-4 space-y-3"
-            >
-              {navItems.map((item) => (
-                <a key={item.label} href={item.href}
-                  className="block text-sm text-slate-400 py-2" onClick={() => setMenuOpen(false)}>
-                  {item.label}
-                </a>
-              ))}
-              <div className="pt-2 space-y-2">
-                <Link to="/login"    className="btn-secondary w-full justify-center text-sm">Sign In</Link>
-                <Link to="/register" className="btn-primary w-full justify-center text-sm">Get Started Free</Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
-
-      {/* ── Hero Section ──────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center justify-center pt-40 pb-16 px-6">
-        <ParticleField />
-
-        {/* Background Gradients */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full bg-brand-600/10 blur-3xl animate-pulse-slow" />
-          <div className="absolute bottom-20 right-1/4 w-80 h-80 rounded-full bg-accent-violet/10 blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-500/5 blur-3xl" />
-        </div>
-
-        <div className="relative max-w-6xl mx-auto text-center">
-          {/* Badge */}
+      {/* ── Hero ── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-24">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-400 text-sm font-medium mb-8"
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
           >
-            <Sparkles className="w-4 h-4" />
-            Powered by GPT-4 · Real-time Market Intelligence
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black font-display leading-[1.05] mb-6"
-          >
-            Your{' '}
-            <span className="gradient-text">AI Co-Pilot</span>
-            <br />
-            for Smart{' '}
-            <span className="gradient-text-gold">Investing</span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            InvestIQ AI analyzes your portfolio, delivers Buy/Hold/Sell signals, assesses risk,
-            plans your goals, and chats with you like an expert wealth manager.
-            <span className="text-slate-300"> All powered by AI.</span>
-          </motion.p>
-
-          {/* CTA Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-          >
-            <Link to="/register" className="btn-primary text-base px-8 py-3.5 gap-2.5 shadow-glow">
-              <Sparkles className="w-5 h-5" />
-              Start Free — No Credit Card
-            </Link>
-            <button className="btn-secondary text-base px-8 py-3.5 gap-2">
-              <Play className="w-4 h-4 fill-current" />
-              Watch Demo
-            </button>
-          </motion.div>
-
-          {/* Trust Row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-wrap gap-6 justify-center items-center text-xs text-slate-500"
-          >
-            {['256-bit Encryption', 'SEBI Compliant', '99.9% Uptime', 'SOC 2 Certified'].map((t) => (
-              <span key={t} className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                {t}
-              </span>
-            ))}
-          </motion.div>
-
-          {/* Hero Dashboard Preview */}
-          <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="mt-16 relative max-w-5xl mx-auto"
-          >
-            {/* Glow Effect */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-brand-600/20 to-accent-violet/20 blur-2xl rounded-3xl" />
-
-            {/* Dashboard Preview Card */}
-            <div className="relative glass-card rounded-3xl p-6 border border-white/10 overflow-hidden">
-              {/* Simulated Dashboard Header */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-rose-500" />
-                <div className="w-3 h-3 rounded-full bg-amber-500" />
-                <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                <div className="flex-1 mx-4 h-6 rounded-lg bg-white/5 flex items-center px-3">
-                  <span className="text-xs text-slate-500">app.investiq.ai/dashboard</span>
-                </div>
-              </div>
-
-              {/* Simulated Stats Row */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                {[
-                  { label: 'Portfolio Value', value: '₹24,85,320', change: '+12.4%', up: true },
-                  { label: 'Today\'s P&L',    value: '+₹15,240',   change: '+0.61%', up: true },
-                  { label: 'Health Score',    value: '84/100',      change: '+5 pts',  up: true },
-                  { label: 'Risk Level',      value: 'Moderate',    change: 'Optimal', up: true },
-                ].map((stat, i) => (
-                  <div key={i} className="rounded-xl bg-white/5 border border-white/5 p-4">
-                    <div className="text-xs text-slate-500 mb-1.5">{stat.label}</div>
-                    <div className="text-lg font-bold text-white font-display">{stat.value}</div>
-                    <div className={`text-xs mt-1 ${stat.up ? 'text-emerald-400' : 'text-rose-400'}`}>{stat.change}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Simulated Chart Area */}
-              <div className="h-32 rounded-xl bg-gradient-to-r from-brand-600/10 to-accent-violet/10 border border-white/5 flex items-end px-4 pb-4 gap-1">
-                {[40, 55, 45, 70, 60, 80, 75, 90, 85, 95, 88, 100].map((h, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex-1 rounded-t-sm bg-gradient-to-t from-brand-500 to-brand-400"
-                    style={{ height: `${h}%` }}
-                    initial={{ scaleY: 0 }}
-                    animate={{ scaleY: 1 }}
-                    transition={{ delay: 0.6 + i * 0.05, duration: 0.4, ease: 'easeOut' }}
-                  />
-                ))}
-              </div>
-
-              {/* AI Insight Banner */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2 }}
-                className="absolute bottom-6 right-6 glass-card rounded-xl p-3 border border-brand-500/30 max-w-xs"
-              >
-                <div className="flex items-start gap-2">
-                  <div className="w-6 h-6 rounded-lg bg-brand-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Brain className="w-3.5 h-3.5 text-brand-400" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-brand-400 mb-0.5">AI Insight</div>
-                    <div className="text-xs text-slate-300">HDFC Bank is 12% undervalued. Consider increasing allocation by 5%.</div>
-                  </div>
-                </div>
-              </motion.div>
+            <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100">
+              <Sparkles className="w-3.5 h-3.5" />
+              AI-Powered Financial Coaching
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* ── Testimonials ──────────────────────────────────────────────────── */}
-      <section className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black font-display mb-4">
-              Loved by{' '}
-              <span className="gradient-text-gold">12,000+</span> investors
-            </h2>
-            <p className="text-slate-400">Real results from real people.</p>
-          </div>
+            <h1 className="text-4xl md:text-5xl font-black leading-tight" style={{ fontFamily: 'Outfit, sans-serif', color: '#0f172a' }}>
+              Your AI Financial
+              <span className="block text-indigo-600">Coach is Waiting.</span>
+            </h1>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="card-static p-6 space-y-4"
-              >
-                {/* Stars */}
-                <div className="flex gap-1">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-sm text-slate-300 leading-relaxed italic">"{t.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-xs font-bold text-white">
-                    {t.image}
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-white">{t.name}</div>
-                    <div className="text-xs text-slate-500">{t.role}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+            <p className="text-lg text-slate-500 leading-relaxed">
+              Track portfolios, get GPT-4 investment insights, plan goals,
+              and stress-test your wealth — all in one premium platform.
+            </p>
 
-      {/* ── Final CTA ─────────────────────────────────────────────────────── */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative rounded-3xl overflow-hidden p-12 text-center"
-            style={{ background: 'linear-gradient(135deg, rgba(102,126,234,0.15) 0%, rgba(118,75,162,0.1) 100%)', border: '1px solid rgba(102,126,234,0.2)' }}
-          >
-            <div className="absolute inset-0 bg-gradient-radial from-brand-500/5 to-transparent" />
-            <div className="relative">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center mx-auto mb-6 shadow-glow">
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-4xl md:text-5xl font-black font-display mb-4">
-                Start investing{' '}
-                <span className="gradient-text">smarter today</span>
-              </h2>
-              <p className="text-slate-400 text-lg mb-8 max-w-xl mx-auto">
-                Join 12,000+ investors who trust InvestIQ AI to grow their wealth.
-                Free to start, no credit card required.
-              </p>
-              <Link to="/register" className="btn-primary text-lg px-10 py-4 shadow-glow inline-flex">
-                <Sparkles className="w-5 h-5" />
-                Create Free Account
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <p className="text-xs text-slate-500 mt-4">
-                14-day free trial · No credit card · Cancel anytime
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Footer ────────────────────────────────────────────────────────── */}
-      <footer className="border-t border-white/5 py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center">
-                <TrendingUp className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-bold font-display gradient-text">InvestIQ AI</span>
-            </div>
-            <div className="text-xs text-slate-600 text-center">
-              © 2025 InvestIQ AI. All rights reserved. · Built with ❤️ for investors everywhere
-            </div>
-            <div className="flex gap-6 text-xs text-slate-600">
-              {['Privacy', 'Terms', 'Security', 'Contact'].map((l) => (
-                <a key={l} href="#" className="hover:text-slate-400 transition-colors">{l}</a>
+            <ul className="space-y-2">
+              {['Live NSE & BSE stock prices', 'AI Buy/Hold/Sell signals', 'Risk analysis & goal planning', 'Free to start, no credit card needed'].map(f => (
+                <li key={f} className="flex items-center gap-2.5 text-sm text-slate-600">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                  {f}
+                </li>
               ))}
+            </ul>
+
+            <div className="flex items-center gap-4 pt-2">
+              <Link to="/register" className="btn-primary text-base px-6 py-3">
+                Start for Free <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link to="/login" className="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors">
+                Already have an account →
+              </Link>
             </div>
+
+            {/* Trust row */}
+            <div className="flex items-center gap-4 pt-2">
+              <div className="flex -space-x-2">
+                {['P', 'R', 'A', 'S'].map((l, i) => (
+                  <div key={i} className="w-7 h-7 rounded-full bg-indigo-100 border-2 border-white flex items-center justify-center text-2xs font-bold text-indigo-600">
+                    {l}
+                  </div>
+                ))}
+              </div>
+              <div className="text-sm text-slate-500">
+                <span className="font-bold text-slate-800">12,000+</span> investors trust InvestIQ AI
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right: Dashboard preview */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="relative"
+          >
+            <div className="absolute -inset-4 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl -z-10" />
+            <DashboardPreview />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Stats bar ── */}
+      <section className="bg-indigo-600">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map(({ label, value, icon: Icon }) => (
+            <div key={label} className="text-center text-white">
+              <div className="text-2xl md:text-3xl font-black">{value}</div>
+              <div className="text-indigo-200 text-sm mt-1">{label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Features ── */}
+      <section id="features" className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-100 mb-4">
+            <Zap className="w-3.5 h-3.5" /> Everything you need
+          </div>
+          <h2 className="text-3xl md:text-4xl font-black" style={{ fontFamily: 'Outfit, sans-serif', color: '#0f172a' }}>
+            Invest smarter with AI
+          </h2>
+          <p className="text-slate-500 mt-3 text-lg max-w-2xl mx-auto">
+            Six powerful AI tools to help you build wealth faster, avoid costly mistakes, and stay ahead of the market.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07 }}
+              className="card p-6 group"
+            >
+              <div className={`w-10 h-10 rounded-xl ${f.iconBg} ${f.iconColor} flex items-center justify-center mb-4`}>
+                <f.icon className="w-5 h-5" />
+              </div>
+              <h3 className="font-bold text-slate-900 mb-2">{f.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── How it Works ── */}
+      <section id="how" className="bg-slate-50 py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-black" style={{ fontFamily: 'Outfit, sans-serif', color: '#0f172a' }}>
+              Get started in 3 steps
+            </h2>
+            <p className="text-slate-500 mt-3 text-lg">No paperwork, no KYC delays. Just sign up and start investing smarter.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { step: '01', title: 'Create your account', desc: 'Sign up for free in under 60 seconds. No credit card required.', icon: Users },
+              { step: '02', title: 'Add your portfolio', desc: 'Import your holdings or add stocks manually. Works with any broker.', icon: PieChart },
+              { step: '03', title: 'Get AI insights', desc: 'Instantly receive AI-powered analysis, recommendations, and alerts.', icon: Sparkles },
+            ].map((s) => (
+              <div key={s.step} className="text-center space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mx-auto font-black text-lg" style={{ fontFamily: 'Outfit, sans-serif' }}>
+                  {s.step}
+                </div>
+                <h3 className="font-bold text-slate-900 text-lg">{s.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section id="testimonials" className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-black" style={{ fontFamily: 'Outfit, sans-serif', color: '#0f172a' }}>
+            Loved by <span className="text-indigo-600">12,000+</span> investors
+          </h2>
+          <p className="text-slate-500 mt-3 text-lg">Real results from real people.</p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {testimonials.map((t) => (
+            <div key={t.name} className="card p-6 space-y-4">
+              <div className="flex gap-0.5">
+                {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed italic">{t.text}</p>
+              <div className="flex items-center gap-3 pt-1">
+                <div className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600">
+                  {t.initials}
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-slate-900">{t.name}</div>
+                  <div className="text-xs text-slate-500">{t.role}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA Banner ── */}
+      <section className="bg-indigo-600 py-16">
+        <div className="max-w-3xl mx-auto px-4 text-center space-y-6">
+          <h2 className="text-3xl md:text-4xl font-black text-white" style={{ fontFamily: 'Outfit, sans-serif' }}>
+            Start investing smarter today
+          </h2>
+          <p className="text-indigo-200 text-lg">
+            Join 12,000+ investors already using AI to grow their wealth. Free to start.
+          </p>
+          <Link to="/register" className="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold px-8 py-3.5 rounded-xl hover:bg-indigo-50 transition-colors shadow-lg text-base">
+            Get Started Free <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="border-t border-slate-100 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center">
+              <TrendingUp className="w-3.5 h-3.5 text-white" />
+            </div>
+            <span className="font-bold text-slate-700 text-sm">InvestIQ AI</span>
+          </div>
+          <p className="text-xs text-slate-400">© 2025 InvestIQ AI. Built with ❤️ for smart investors.</p>
+          <div className="flex items-center gap-6 text-xs text-slate-400">
+            <a href="#" className="hover:text-slate-600 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-slate-600 transition-colors">Terms</a>
+            <a href="#" className="hover:text-slate-600 transition-colors">Support</a>
           </div>
         </div>
       </footer>

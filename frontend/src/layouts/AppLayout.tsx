@@ -9,71 +9,67 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 import { useNavigate } from 'react-router-dom';
-import AnimatedBackground from '@/components/AnimatedBackground';
 import TickerTape from '@/components/ui/TickerTape';
 import GlobalSearch from '@/components/ui/GlobalSearch';
 
 const navItems = [
   { group: 'Trading',
     items: [
-      { to: '/app/live-market', icon: Activity,       label: 'Explore'     },
-      { to: '/app/portfolio',   icon: PieChart,       label: 'Holdings'    },
-      { to: '/app/positions',   icon: LayoutDashboard,label: 'Positions'   },
-      { to: '/app/orders',      icon: FileText,       label: 'Orders'      },
-      { to: '/app/watchlist',   icon: Target,         label: 'Watchlist'   },
+      { to: '/app/live-market', icon: Activity,        label: 'Explore'     },
+      { to: '/app/portfolio',   icon: PieChart,        label: 'Holdings'    },
+      { to: '/app/positions',   icon: LayoutDashboard, label: 'Positions'   },
+      { to: '/app/orders',      icon: FileText,        label: 'Orders'      },
+      { to: '/app/watchlist',   icon: Target,          label: 'Watchlist'   },
     ]
   },
   { group: 'AI Features',
     items: [
-      { to: '/app/ai-chat',         icon: MessageSquare, label: 'AI Coach',          badge: 'AI'      },
-      { to: '/app/recommendation',  icon: Sparkles,      label: 'AI Recommendation', badge: 'New'     },
-      { to: '/app/risk-simulator',  icon: ShieldAlert,   label: 'Risk Simulator'                      },
-      { to: '/app/wealth-score',    icon: Trophy,        label: 'Wealth Score'                        },
-      { to: '/app/personality-test', icon: Brain,        label: 'Investor Profile'                    },
+      { to: '/app/ai-chat',          icon: MessageSquare, label: 'AI Coach',          badge: 'AI'  },
+      { to: '/app/recommendation',   icon: Sparkles,      label: 'AI Picks',          badge: 'New' },
+      { to: '/app/risk-simulator',   icon: ShieldAlert,   label: 'Risk Simulator'                  },
+      { to: '/app/wealth-score',     icon: Trophy,        label: 'Wealth Score'                    },
+      { to: '/app/personality-test', icon: Brain,         label: 'Investor Profile'               },
     ]
   },
   { group: 'Planning & Tools',
     items: [
-      { to: '/app/analytics',          icon: BarChart3,  label: 'Analytics'          },
-      { to: '/app/goals',              icon: Target,     label: 'Goal Planner'       },
-      { to: '/app/retirement-planner', icon: Sunset,     label: 'Retirement'         },
-      { to: '/app/calculators',        icon: Calculator, label: 'Calculators'        },
-      { to: '/app/news',               icon: Newspaper,  label: 'News'               },
-      { to: '/app/alerts',             icon: Bell,       label: 'Alerts', badge: '3' },
+      { to: '/app/analytics',          icon: BarChart3,  label: 'Analytics'           },
+      { to: '/app/goals',              icon: Target,     label: 'Goal Planner'        },
+      { to: '/app/retirement-planner', icon: Sunset,     label: 'Retirement'          },
+      { to: '/app/calculators',        icon: Calculator, label: 'Calculators'         },
+      { to: '/app/news',               icon: Newspaper,  label: 'News'                },
+      { to: '/app/alerts',             icon: Bell,       label: 'Alerts', badge: '3'  },
     ]
   },
   { group: 'Account',
     items: [
-      { to: '/app/reports',  icon: FileText,  label: 'Reports'  },
-      { to: '/app/profile',  icon: User,      label: 'Profile'  },
-      { to: '/app/settings', icon: Settings,  label: 'Settings' },
+      { to: '/app/reports',  icon: FileText, label: 'Reports'  },
+      { to: '/app/profile',  icon: User,     label: 'Profile'  },
+      { to: '/app/settings', icon: Settings, label: 'Settings' },
     ]
   },
 ];
 
 export default function AppLayout() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed]   = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user, logout }  = useAuthStore();
-  const navigate          = useNavigate();
-  const location          = useLocation();
+  const { user, logout } = useAuthStore();
+  const navigate         = useNavigate();
+  const location         = useLocation();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
+  const handleLogout = () => { logout(); navigate('/'); };
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
       {/* Logo */}
-      <div className={`flex items-center gap-3 p-4 border-b border-white/5 ${collapsed ? 'justify-center' : ''}`}>
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center shadow-glow flex-shrink-0">
-          <TrendingUp className="w-5 h-5 text-white" />
+      <div className={`flex items-center gap-3 px-4 py-4 border-b border-slate-100 ${collapsed ? 'justify-center' : ''}`}>
+        <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center flex-shrink-0 shadow-sm">
+          <TrendingUp className="w-4 h-4 text-white" />
         </div>
         {!collapsed && (
           <div>
-            <div className="text-sm font-black font-display gradient-text">InvestIQ AI</div>
-            <div className="text-2xs text-slate-500">Portfolio Advisor</div>
+            <div className="text-sm font-black font-display text-indigo-600">InvestIQ AI</div>
+            <div className="text-2xs text-slate-400">AI Portfolio Advisor</div>
           </div>
         )}
       </div>
@@ -83,7 +79,7 @@ export default function AppLayout() {
         {navItems.map(group => (
           <div key={group.group}>
             {!collapsed && (
-              <div className="px-2 mb-1.5 text-2xs font-semibold text-slate-600 uppercase tracking-wider">
+              <div className="px-2 mb-1.5 text-2xs font-semibold text-slate-400 uppercase tracking-wider">
                 {group.group}
               </div>
             )}
@@ -103,7 +99,7 @@ export default function AppLayout() {
                     <>
                       <span className="flex-1 text-sm">{item.label}</span>
                       {'badge' in item && item.badge && (
-                        <span className={item.badge === 'AI' ? 'badge-brand text-2xs' : 'badge-loss text-2xs px-1.5 py-0.5 rounded-full min-w-4 text-center'}>
+                        <span className={item.badge === 'AI' || item.badge === 'New' ? 'badge-brand text-2xs' : 'badge-loss text-2xs px-1.5 py-0.5 rounded-full min-w-4 text-center'}>
                           {item.badge}
                         </span>
                       )}
@@ -117,22 +113,22 @@ export default function AppLayout() {
       </nav>
 
       {/* User Footer */}
-      <div className={`border-t border-white/5 p-3 ${collapsed ? 'flex justify-center' : ''}`}>
+      <div className={`border-t border-slate-100 p-3 ${collapsed ? 'flex justify-center' : ''}`}>
         {!collapsed ? (
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600 flex-shrink-0">
               {user?.name?.[0]?.toUpperCase() || 'A'}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-xs font-semibold text-white truncate">{user?.name || 'Demo User'}</div>
-              <div className="text-2xs text-slate-500 truncate">{user?.role || 'premium'} plan</div>
+              <div className="text-xs font-semibold text-slate-800 truncate">{user?.name || 'Demo User'}</div>
+              <div className="text-2xs text-slate-400 truncate capitalize">{user?.role || 'free'} plan</div>
             </div>
-            <button onClick={handleLogout} className="p-1.5 rounded-lg hover:bg-white/10 text-slate-500 hover:text-rose-400 transition-all" title="Logout">
+            <button onClick={handleLogout} className="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 transition-all" title="Logout">
               <LogOut className="w-4 h-4" />
             </button>
           </div>
         ) : (
-          <button onClick={handleLogout} className="btn-icon p-2 text-slate-500 hover:text-rose-400" title="Logout">
+          <button onClick={handleLogout} className="btn-icon p-2 text-slate-400 hover:text-red-500" title="Logout">
             <LogOut className="w-4 h-4" />
           </button>
         )}
@@ -141,20 +137,20 @@ export default function AppLayout() {
   );
 
   return (
-    <div className="flex h-screen bg-transparent overflow-hidden relative">
-      <AnimatedBackground />
+    <div className="flex h-screen bg-[#f8faff] overflow-hidden">
 
       {/* Desktop Sidebar */}
       <motion.aside
         animate={{ width: collapsed ? 64 : 240 }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
-        className="hidden md:flex flex-col bg-dark-900 border-r border-white/5 relative z-10 flex-shrink-0"
+        className="hidden md:flex flex-col bg-white border-r border-slate-100 relative z-10 flex-shrink-0"
+        style={{ boxShadow: '1px 0 0 #e2e8f0' }}
       >
         <SidebarContent />
         {/* Collapse Toggle */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-32 w-6 h-6 rounded-full bg-dark-800 border border-white/10 flex items-center justify-center hover:border-brand-500/40 transition-all z-20"
+          className="absolute -right-3 top-32 w-6 h-6 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:border-indigo-300 hover:bg-indigo-50 transition-all z-20 shadow-sm"
         >
           <ChevronRight className={`w-3 h-3 text-slate-400 transition-transform ${collapsed ? '' : 'rotate-180'}`} />
         </button>
@@ -165,9 +161,9 @@ export default function AppLayout() {
         {mobileOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="md:hidden fixed inset-0 bg-black/60 z-30" onClick={() => setMobileOpen(false)} />
+              className="md:hidden fixed inset-0 bg-black/30 z-30" onClick={() => setMobileOpen(false)} />
             <motion.aside initial={{ x: -240 }} animate={{ x: 0 }} exit={{ x: -240 }} transition={{ duration: 0.2 }}
-              className="md:hidden fixed left-0 top-0 bottom-0 w-60 bg-dark-900 border-r border-white/5 z-40">
+              className="md:hidden fixed left-0 top-0 bottom-0 w-60 bg-white border-r border-slate-100 z-40 shadow-xl">
               <SidebarContent />
             </motion.aside>
           </>
@@ -180,40 +176,38 @@ export default function AppLayout() {
         <TickerTape />
 
         {/* Top Bar */}
-        <header className="relative z-50 h-14 border-b border-white/5 bg-dark-900/50 backdrop-blur-sm flex items-center justify-between px-4 flex-shrink-0 gap-4">
-          <div className="flex items-center gap-6 flex-1">
+        <header className="relative z-50 h-14 border-b border-slate-100 bg-white flex items-center justify-between px-4 flex-shrink-0 gap-4">
+          <div className="flex items-center gap-4 flex-1">
             <button onClick={() => setMobileOpen(true)} className="md:hidden btn-icon p-2">
-              <Menu className="w-5 h-5" />
+              <Menu className="w-5 h-5 text-slate-600" />
             </button>
-            
+
             {/* Global Search Bar */}
             <div className="hidden md:block flex-1 max-w-xl">
               <GlobalSearch />
             </div>
 
-            {/* Asset Class Navigation (Desktop) */}
-            <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-400">
-              <NavLink to="/app/live-market" className={({ isActive }) => `hover:text-white transition-colors ${isActive ? 'text-white border-b-2 border-brand-500 py-4' : ''}`}>
+            {/* Asset Class Navigation */}
+            <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-500">
+              <NavLink to="/app/live-market" className={({ isActive }) =>
+                `hover:text-indigo-600 transition-colors ${isActive ? 'text-indigo-600 border-b-2 border-indigo-600 py-4' : ''}`
+              }>
                 Stocks
               </NavLink>
-              <button className="hover:text-white transition-colors py-4">
-                F&O
-              </button>
-              <button className="hover:text-white transition-colors py-4">
-                Mutual Funds
-              </button>
+              <button className="hover:text-indigo-600 transition-colors py-4">F&O</button>
+              <button className="hover:text-indigo-600 transition-colors py-4">Mutual Funds</button>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <NavLink to="/app/alerts" className="relative btn-icon p-2">
-              <Bell className="w-4 h-4" />
-              <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-rose-500 text-white text-2xs flex items-center justify-center font-bold">3</span>
+              <Bell className="w-4 h-4 text-slate-600" />
+              <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-red-500 text-white text-2xs flex items-center justify-center font-bold">3</span>
             </NavLink>
             <NavLink to="/app/ai-chat" className="btn-primary text-xs gap-1.5 px-3 py-2">
               <Sparkles className="w-3.5 h-3.5" /> Ask AI
             </NavLink>
-            <NavLink to="/app/profile" className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-xs font-bold text-white">
+            <NavLink to="/app/profile" className="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600">
               {user?.name?.[0]?.toUpperCase() || 'A'}
             </NavLink>
           </div>
