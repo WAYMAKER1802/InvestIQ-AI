@@ -68,20 +68,20 @@ export default function PersonalityTest() {
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
           className="card-static p-8 text-center">
           <div className="text-5xl mb-4">{profile.icon}</div>
-          <h2 className="text-3xl font-black font-display text-white mb-2">
+          <h2 className="text-3xl font-black font-display text-slate-900 mb-2">
             You're a <span style={{ color: profile.color }}>{profile.type} Investor</span>
           </h2>
-          <p className="text-slate-400 mb-6">{profile.desc}</p>
+          <p className="text-slate-500 mb-6">{profile.desc}</p>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-slate-400 text-sm">Risk Appetite:</span>
+            <span className="text-slate-500 text-sm">Risk Appetite:</span>
             <div className="progress-bar w-32 h-2">
               <div className="h-full rounded-full" style={{ width: `${profile.risk * 10}%`, background: profile.color }} />
             </div>
             <span className="font-bold text-sm" style={{ color: profile.color }}>{profile.risk}/10</span>
           </div>
-          <div className="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-left mb-6">
+          <div className="p-4 rounded-xl bg-indigo-50 border border-indigo-200 text-left mb-6">
             <div className="text-xs font-semibold text-brand-300 mb-2">🧠 AI Recommended Strategy:</div>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-slate-600">
               Based on your profile, we recommend allocating <strong>70% equities</strong> (large-cap + flexi-cap funds),
               <strong> 20% debt</strong> (liquid funds + short-term FDs), and <strong>10% alternatives</strong> (gold + REITs).
               Your ideal SIP horizon is <strong>7+ years</strong> for maximum compounding.
@@ -99,8 +99,8 @@ export default function PersonalityTest() {
   return (
     <div className="max-w-2xl space-y-6">
       <div>
-        <h1 className="text-2xl font-black font-display text-white">Investor Personality Test</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Discover your risk profile in 5 questions</p>
+        <h1 className="text-2xl font-black font-display text-slate-900">Investor Personality Test</h1>
+        <p className="text-slate-500 text-sm mt-0.5">Discover your risk profile in 5 questions</p>
       </div>
 
       {/* Progress */}
@@ -118,21 +118,21 @@ export default function PersonalityTest() {
         <motion.div key={currentQ} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}
           transition={{ duration: 0.3 }} className="card-static p-6 space-y-4">
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-full bg-brand-500/20 flex items-center justify-center text-sm font-bold text-brand-400 flex-shrink-0">
+            <div className="w-8 h-8 rounded-full bg-indigo-600/20 flex items-center justify-center text-sm font-bold text-indigo-600 flex-shrink-0">
               {currentQ + 1}
             </div>
-            <h2 className="text-lg font-bold text-white font-display leading-snug">{q.question}</h2>
+            <h2 className="text-lg font-bold text-slate-900 font-display leading-snug">{q.question}</h2>
           </div>
 
           <div className="space-y-2.5">
             {q.options.map((opt, i) => (
               <button key={i} onClick={() => handleAnswer(i)}
-                className="w-full text-left p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-brand-500/40 hover:bg-brand-500/10 text-sm text-slate-300 hover:text-white transition-all flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full border border-white/20 flex-shrink-0 flex items-center justify-center text-xs text-slate-500">
+                className="w-full text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-brand-500/40 hover:bg-indigo-50 text-sm text-slate-600 hover:text-slate-900 transition-all flex items-center gap-3">
+                <span className="w-5 h-5 rounded-full border border-slate-300 flex-shrink-0 flex items-center justify-center text-xs text-slate-500">
                   {String.fromCharCode(65 + i)}
                 </span>
                 {opt}
-                <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 text-brand-400" />
+                <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 text-indigo-600" />
               </button>
             ))}
           </div>

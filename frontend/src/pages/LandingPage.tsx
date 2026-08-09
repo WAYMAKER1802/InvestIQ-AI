@@ -339,7 +339,7 @@ export default function LandingPage() {
           {testimonials.map((t) => (
             <div key={t.name} className="card p-6 space-y-4">
               <div className="flex gap-0.5">
-                {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
+                {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-600" />)}
               </div>
               <p className="text-slate-600 text-sm leading-relaxed italic">{t.text}</p>
               <div className="flex items-center gap-3 pt-1">
@@ -380,8 +380,8 @@ export default function LandingPage() {
             </div>
             <span className="font-bold text-slate-700 text-sm">InvestIQ AI</span>
           </div>
-          <p className="text-xs text-slate-400">© 2025 InvestIQ AI. Built with ❤️ for smart investors.</p>
-          <div className="flex items-center gap-6 text-xs text-slate-400">
+          <p className="text-xs text-slate-500">© 2025 InvestIQ AI. Built with ❤️ for smart investors.</p>
+          <div className="flex items-center gap-6 text-xs text-slate-500">
             <a href="#" className="hover:text-slate-600 transition-colors">Privacy</a>
             <a href="#" className="hover:text-slate-600 transition-colors">Terms</a>
             <a href="#" className="hover:text-slate-600 transition-colors">Support</a>

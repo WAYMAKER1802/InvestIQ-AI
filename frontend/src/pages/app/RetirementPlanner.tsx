@@ -42,14 +42,14 @@ export default function RetirementPlanner() {
   return (
     <div className="space-y-6 max-w-screen-xl">
       <div>
-        <h1 className="text-2xl font-black font-display text-white">Retirement Planner</h1>
-        <p className="text-slate-400 text-sm mt-0.5">AI-powered retirement corpus calculator</p>
+        <h1 className="text-2xl font-black font-display text-slate-900">Retirement Planner</h1>
+        <p className="text-slate-500 text-sm mt-0.5">AI-powered retirement corpus calculator</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Inputs */}
         <div className="card-static p-5 space-y-4">
-          <h3 className="text-sm font-bold text-white font-display">Your Details</h3>
+          <h3 className="text-sm font-bold text-slate-900 font-display">Your Details</h3>
           {[
             { label: 'Current Age (yrs)',     value: currentAge,    setter: setCurrentAge,    min: 18, max: 60, step: 1 },
             { label: 'Retirement Age (yrs)',  value: retireAge,     setter: setRetireAge,     min: 40, max: 70, step: 1 },
@@ -61,8 +61,8 @@ export default function RetirementPlanner() {
           ].map(f => (
             <div key={f.label}>
               <div className="flex justify-between text-xs mb-1">
-                <label className="text-slate-400">{f.label}</label>
-                <span className="font-semibold text-white font-numeric">
+                <label className="text-slate-500">{f.label}</label>
+                <span className="font-semibold text-slate-900 font-numeric">
                   {f.label.includes('₹') ? `₹${f.value.toLocaleString('en-IN')}` :
                    f.label.includes('%') ? `${f.value}%` : `${f.value}`}
                 </span>
@@ -77,10 +77,10 @@ export default function RetirementPlanner() {
         <div className="space-y-4">
           {/* Key Results */}
           {[
-            { label: 'Corpus Required',   value: `₹${(corpusNeeded / 10000000).toFixed(2)} Cr`, icon: '🎯', color: 'text-white' },
-            { label: 'Projected Corpus',  value: `₹${(futureCorpus / 10000000).toFixed(2)} Cr`, icon: '📈', color: 'text-emerald-400' },
-            { label: gap > 0 ? 'Corpus Shortfall' : 'Surplus', value: `₹${(Math.abs(gap) / 10000000).toFixed(2)} Cr`, icon: gap > 0 ? '⚠️' : '🎉', color: gap > 0 ? 'text-rose-400' : 'text-emerald-400' },
-            { label: 'Monthly Expense at Retirement', value: `₹${Math.round(inflatedMonthlyExp).toLocaleString('en-IN')}`, icon: '💸', color: 'text-amber-400' },
+            { label: 'Corpus Required',   value: `₹${(corpusNeeded / 10000000).toFixed(2)} Cr`, icon: '🎯', color: 'text-slate-900' },
+            { label: 'Projected Corpus',  value: `₹${(futureCorpus / 10000000).toFixed(2)} Cr`, icon: '📈', color: 'text-emerald-600' },
+            { label: gap > 0 ? 'Corpus Shortfall' : 'Surplus', value: `₹${(Math.abs(gap) / 10000000).toFixed(2)} Cr`, icon: gap > 0 ? '⚠️' : '🎉', color: gap > 0 ? 'text-red-500' : 'text-emerald-600' },
+            { label: 'Monthly Expense at Retirement', value: `₹${Math.round(inflatedMonthlyExp).toLocaleString('en-IN')}`, icon: '💸', color: 'text-amber-600' },
           ].map(r => (
             <div key={r.label} className="stat-card">
               <div className="flex items-center gap-2 mb-1">
@@ -92,11 +92,11 @@ export default function RetirementPlanner() {
           ))}
 
           {/* Status */}
-          <div className={`p-4 rounded-xl border ${isOnTrack ? 'border-emerald-500/30 bg-emerald-500/10' : 'border-rose-500/30 bg-rose-500/10'}`}>
-            <div className={`text-sm font-bold mb-1 ${isOnTrack ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <div className={`p-4 rounded-xl border ${isOnTrack ? 'border-emerald-500/30 bg-emerald-50' : 'border-rose-500/30 bg-red-50'}`}>
+            <div className={`text-sm font-bold mb-1 ${isOnTrack ? 'text-emerald-600' : 'text-red-500'}`}>
               {isOnTrack ? '✅ You\'re on track!' : '⚠️ Action Needed'}
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               {isOnTrack
                 ? `Your current SIP of ₹${monthlySIP.toLocaleString('en-IN')}/month will build a surplus of ₹${(Math.abs(gap) / 100000).toFixed(0)}L over your corpus requirement.`
                 : `Increase your SIP by ₹${Math.round(gap * (r / 100) / (Math.pow(1 + returnRate / 100 / 12, ns) - 1)).toLocaleString('en-IN')}/month to close the gap.`
@@ -107,7 +107,7 @@ export default function RetirementPlanner() {
 
         {/* Chart */}
         <div className="card-static p-5">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">Corpus Growth Projection</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Corpus Growth Projection</h3>
           <ResponsiveContainer width="100%" height={280}>
             <AreaChart data={projectionData}>
               <defs>
@@ -126,8 +126,8 @@ export default function RetirementPlanner() {
             </AreaChart>
           </ResponsiveContainer>
           <div className="flex gap-4 mt-2">
-            <div className="flex items-center gap-1.5 text-xs text-slate-400"><span className="w-3 h-0.5 bg-brand-500 rounded" />Your Corpus</div>
-            <div className="flex items-center gap-1.5 text-xs text-slate-400"><span className="w-3 h-0.5 bg-amber-500 rounded border-dashed" />Target</div>
+            <div className="flex items-center gap-1.5 text-xs text-slate-500"><span className="w-3 h-0.5 bg-indigo-600 rounded" />Your Corpus</div>
+            <div className="flex items-center gap-1.5 text-xs text-slate-500"><span className="w-3 h-0.5 bg-amber-500 rounded border-dashed" />Target</div>
           </div>
         </div>
       </div>

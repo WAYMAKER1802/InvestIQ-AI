@@ -78,7 +78,7 @@ export default function StockDetails() {
       {/* Back Button */}
       <button 
         onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-semibold"
+        className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors text-sm font-semibold"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Explore
       </button>
@@ -91,34 +91,34 @@ export default function StockDetails() {
           {/* Header */}
           <div className="flex justify-between items-start">
             <div className="flex gap-4">
-              <div className="w-14 h-14 rounded-full bg-brand-500/10 flex items-center justify-center text-xl font-black text-brand-400">
+              <div className="w-14 h-14 rounded-full bg-indigo-50 flex items-center justify-center text-xl font-black text-indigo-600">
                 {stockSymbol[0]}
               </div>
               <div>
-                <h1 className="text-3xl font-black font-display text-white">{stockSymbol}</h1>
-                <div className="text-sm text-slate-400 mt-1 uppercase font-semibold tracking-wider">
+                <h1 className="text-3xl font-black font-display text-slate-900">{stockSymbol}</h1>
+                <div className="text-sm text-slate-500 mt-1 uppercase font-semibold tracking-wider">
                   {stockSymbol} • EQUITY
                 </div>
                 <div className="mt-4 flex items-baseline gap-3">
-                  <span className="text-3xl font-black font-numeric text-white">
+                  <span className="text-3xl font-black font-numeric text-slate-900">
                     ₹{quote ? quote.currentPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '210.01'}
                   </span>
                   {quote ? (
-                    <span className={`font-semibold font-numeric ${quote.dayChange >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                    <span className={`font-semibold font-numeric ${quote.dayChange >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                       {quote.dayChange > 0 ? '+' : ''}{quote.dayChange} ({quote.dayChange > 0 ? '+' : ''}{quote.dayChangePct}%) <span className="text-slate-500 text-sm">1D</span>
                     </span>
                   ) : (
-                    <span className="text-emerald-400 font-semibold font-numeric">+13.03 (6.61%) <span className="text-slate-500 text-sm">1D</span></span>
+                    <span className="text-emerald-600 font-semibold font-numeric">+13.03 (6.61%) <span className="text-slate-500 text-sm">1D</span></span>
                   )}
                 </div>
               </div>
             </div>
             
             <div className="flex gap-2">
-              <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+              <button className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all">
                 <Bell className="w-4 h-4" />
               </button>
-              <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+              <button className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all">
                 <Bookmark className="w-4 h-4" />
               </button>
             </div>
@@ -139,11 +139,11 @@ export default function StockDetails() {
           <div className="card-static overflow-hidden">
             
             {/* Header Tabs (BUY / SELL) */}
-            <div className="flex border-b border-white/5">
+            <div className="flex border-b border-slate-100">
               <button 
                 onClick={() => setOrderType('BUY')}
                 className={`flex-1 py-4 font-bold text-sm tracking-wider transition-all ${
-                  orderType === 'BUY' ? 'text-brand-400 border-b-2 border-brand-500 bg-brand-500/5' : 'text-slate-400 hover:text-slate-300'
+                  orderType === 'BUY' ? 'text-indigo-600 border-b-2 border-brand-500 bg-indigo-600/5' : 'text-slate-500 hover:text-slate-600'
                 }`}
               >
                 BUY
@@ -151,7 +151,7 @@ export default function StockDetails() {
               <button 
                 onClick={() => setOrderType('SELL')}
                 className={`flex-1 py-4 font-bold text-sm tracking-wider transition-all ${
-                  orderType === 'SELL' ? 'text-rose-400 border-b-2 border-rose-500 bg-rose-500/5' : 'text-slate-400 hover:text-slate-300'
+                  orderType === 'SELL' ? 'text-red-500 border-b-2 border-rose-500 bg-rose-500/5' : 'text-slate-500 hover:text-slate-600'
                 }`}
               >
                 SELL
@@ -169,21 +169,21 @@ export default function StockDetails() {
                       onClick={() => setDeliveryType(t as any)}
                       className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors border ${
                         deliveryType === t 
-                          ? 'border-brand-500 text-brand-400 bg-brand-500/10' 
-                          : 'border-white/10 text-slate-400 hover:border-white/20'
+                          ? 'border-brand-500 text-indigo-600 bg-indigo-50' 
+                          : 'border-slate-200 text-slate-500 hover:border-slate-300'
                       }`}
                     >
                       {t}
                     </button>
                   ))}
                 </div>
-                <button className="text-slate-400 hover:text-white"><Settings className="w-4 h-4" /></button>
+                <button className="text-slate-500 hover:text-slate-900"><Settings className="w-4 h-4" /></button>
               </div>
 
               {/* Inputs */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-semibold text-slate-300 flex items-center gap-1">
+                  <label className="text-sm font-semibold text-slate-600 flex items-center gap-1">
                     Qty NSE <Info className="w-3 h-3 text-slate-500" />
                   </label>
                   <input 
@@ -196,7 +196,7 @@ export default function StockDetails() {
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-semibold text-slate-300 flex items-center gap-1">
+                  <label className="text-sm font-semibold text-slate-600 flex items-center gap-1">
                     Price Limit <Info className="w-3 h-3 text-slate-500" />
                   </label>
                   <input 
@@ -212,17 +212,17 @@ export default function StockDetails() {
             </div>
 
             {/* Footer */}
-            <div className="p-6 bg-white/5 border-t border-white/5">
-              <div className="flex justify-between items-center text-xs font-semibold text-slate-400 mb-4">
+            <div className="p-6 bg-slate-50 border-t border-slate-100">
+              <div className="flex justify-between items-center text-xs font-semibold text-slate-500 mb-4">
                 <span>Balance: ₹0.00</span>
                 <span>Approx req.: ₹{((parseFloat(qty || '0') * parseFloat(priceLimit || '210.01'))).toFixed(2)}</span>
               </div>
               <button 
                 onClick={handlePlaceOrder}
                 disabled={isPlacing}
-                className={`w-full py-3 rounded-lg font-bold text-white transition-all ${
+                className={`w-full py-3 rounded-lg font-bold text-slate-900 transition-all ${
                   orderType === 'BUY' 
-                    ? 'bg-brand-500 hover:bg-brand-600 shadow-[0_0_20px_rgba(16,185,129,0.3)]' 
+                    ? 'bg-indigo-600 hover:bg-brand-600 shadow-[0_0_20px_rgba(16,185,129,0.3)]' 
                     : 'bg-rose-500 hover:bg-rose-600 shadow-[0_0_20px_rgba(244,63,94,0.3)]'
                 }`}
               >

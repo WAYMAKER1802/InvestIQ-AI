@@ -65,16 +65,16 @@ const LiveStockChart: React.FC<LiveStockChartProps> = ({ symbol, currentPrice, b
         fontSize: 12,
       },
       grid: {
-        vertLines: { color: 'rgba(255,255,255,0.04)' },
-        horzLines: { color: 'rgba(255,255,255,0.04)' },
+        vertLines: { color: 'rgba(0,0,0,0.04)' },
+        horzLines: { color: 'rgba(0,0,0,0.04)' },
       },
       crosshair: {
         mode: CrosshairMode.Normal,
         vertLine: { color: '#6366f1', width: 1, style: 3, labelBackgroundColor: '#4f46e5' },
         horzLine: { color: '#6366f1', width: 1, style: 3, labelBackgroundColor: '#4f46e5' },
       },
-      rightPriceScale: { borderColor: 'rgba(255,255,255,0.08)' },
-      timeScale: { borderColor: 'rgba(255,255,255,0.08)', timeVisible: true, secondsVisible: false },
+      rightPriceScale: { borderColor: 'rgba(0,0,0,0.08)' },
+      timeScale: { borderColor: 'rgba(0,0,0,0.08)', timeVisible: true, secondsVisible: false },
       width: containerRef.current.clientWidth,
       height: containerRef.current.clientHeight || 400,
     });
@@ -140,13 +140,13 @@ const LiveStockChart: React.FC<LiveStockChartProps> = ({ symbol, currentPrice, b
     <div className="flex flex-col h-full">
       {/* Stats bar */}
       <div className="flex items-center gap-4 px-4 pt-3 pb-1 flex-shrink-0">
-        <span className="text-xl font-black font-numeric text-white">
+        <span className="text-xl font-black font-numeric text-slate-900">
           ₹{price.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </span>
-        <span className={`text-sm font-semibold font-numeric ${up ? 'text-emerald-400' : 'text-rose-400'}`}>
+        <span className={`text-sm font-semibold font-numeric ${up ? 'text-emerald-600' : 'text-red-500'}`}>
           {up ? '▲ +' : '▼ '}{change.toFixed(2)} ({up ? '+' : ''}{changePct.toFixed(2)}%)
         </span>
-        <span className="ml-auto text-xs text-slate-500 font-medium px-2 py-0.5 rounded bg-white/5">
+        <span className="ml-auto text-xs text-slate-500 font-medium px-2 py-0.5 rounded bg-slate-50">
           1D • NSE
         </span>
       </div>

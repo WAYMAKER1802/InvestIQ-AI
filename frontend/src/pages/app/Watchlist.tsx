@@ -43,25 +43,25 @@ export default function Watchlist() {
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-slate-400 font-semibold">Loading watchlist...</div>;
+    return <div className="p-8 text-center text-slate-500 font-semibold">Loading watchlist...</div>;
   }
 
   return (
     <div className="space-y-6 max-w-[1000px] mx-auto">
       <div>
-        <h1 className="text-2xl font-black font-display text-white flex items-center gap-2">
-          <Target className="w-6 h-6 text-brand-400" /> Watchlist
+        <h1 className="text-2xl font-black font-display text-slate-900 flex items-center gap-2">
+          <Target className="w-6 h-6 text-indigo-600" /> Watchlist
         </h1>
-        <p className="text-slate-400 text-sm mt-0.5">Track your favorite stocks and assets.</p>
+        <p className="text-slate-500 text-sm mt-0.5">Track your favorite stocks and assets.</p>
       </div>
 
       {items.length === 0 ? (
         <div className="card-static p-12 flex flex-col items-center justify-center text-center">
-          <div className="w-16 h-16 rounded-full bg-brand-500/10 flex items-center justify-center mb-4">
-            <Target className="w-8 h-8 text-brand-400" />
+          <div className="w-16 h-16 rounded-full bg-indigo-50 flex items-center justify-center mb-4">
+            <Target className="w-8 h-8 text-indigo-600" />
           </div>
-          <h3 className="text-xl font-bold text-white mb-2">Your watchlist is empty</h3>
-          <p className="text-slate-400 max-w-sm mb-6">
+          <h3 className="text-xl font-bold text-slate-900 mb-2">Your watchlist is empty</h3>
+          <p className="text-slate-500 max-w-sm mb-6">
             Go to the Explore page to discover and add stocks to your watchlist.
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function Watchlist() {
         <div className="card-static overflow-hidden">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-white/5 text-xs text-slate-400 uppercase tracking-wider">
+              <tr className="border-b border-slate-100 text-xs text-slate-500 uppercase tracking-wider">
                 <th className="p-4 font-semibold">Company</th>
                 <th className="p-4 font-semibold text-right">Market Price</th>
                 <th className="p-4 font-semibold text-right">Actions</th>
@@ -82,15 +82,15 @@ export default function Watchlist() {
                   <tr 
                     key={item.id} 
                     onClick={() => navigate(`/app/stock/${item.symbol}`)}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors group cursor-pointer"
+                    className="border-b border-slate-100 hover:bg-slate-50 transition-colors group cursor-pointer"
                   >
                     <td className="p-4">
-                      <div className="text-sm font-bold text-white">{item.name || item.symbol}</div>
+                      <div className="text-sm font-bold text-slate-900">{item.name || item.symbol}</div>
                       <div className="text-xs text-slate-500">{item.symbol} &bull; {item.assetType}</div>
                     </td>
                     <td className="p-4 text-right">
-                      <div className="text-sm font-bold text-white font-numeric">₹{live.price}</div>
-                      <div className={`text-xs font-semibold flex items-center justify-end gap-1 ${live.up ? 'text-emerald-400' : 'text-rose-400'}`}>
+                      <div className="text-sm font-bold text-slate-900 font-numeric">₹{live.price}</div>
+                      <div className={`text-xs font-semibold flex items-center justify-end gap-1 ${live.up ? 'text-emerald-600' : 'text-red-500'}`}>
                         {live.up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                         {live.percent}
                       </div>
@@ -98,7 +98,7 @@ export default function Watchlist() {
                     <td className="p-4 text-right">
                       <button 
                         onClick={(e) => { e.stopPropagation(); handleRemove(item.symbol); }}
-                        className="p-2 rounded-lg bg-white/5 text-slate-400 hover:bg-rose-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100"
+                        className="p-2 rounded-lg bg-slate-50 text-slate-500 hover:bg-rose-500 hover:text-slate-900 transition-colors opacity-0 group-hover:opacity-100"
                         title="Remove"
                       >
                         <Trash2 className="w-4 h-4" />

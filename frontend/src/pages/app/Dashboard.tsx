@@ -14,7 +14,7 @@ import { usePortfolioStore } from '@/store/portfolioStore';
 import { aiApi } from '@/api/market.api';
 import toast from 'react-hot-toast';
 
-const COLORS = ['#667eea','#10b981','#f59e0b','#06b6d4','#8b5cf6','#f43f5e','#ec4899'];
+const COLORS = ['#4f46e5','#059669','#d97706','#0891b2','#7c3aed','#dc2626','#db2777'];
 
 const RecChip = ({ rec }: { rec: string }) => {
   const cls: Record<string, string> = {
@@ -27,16 +27,16 @@ const RecChip = ({ rec }: { rec: string }) => {
 };
 
 const StatCard = ({ label, value, change, changeType, icon, gradient, loading }: any) => (
-  <div className="stat-card group hover:border-brand-500/20 transition-all">
+  <div className="stat-card group">
     <div className="flex items-start justify-between">
       <div>
         <p className="stat-label">{label}</p>
         {loading
-          ? <div className="w-28 h-7 mt-1 bg-white/5 rounded-lg animate-pulse" />
+          ? <div className="w-28 h-7 mt-1 bg-slate-100 rounded-lg animate-pulse" />
           : <p className="stat-value mt-1">{value}</p>
         }
         {change && !loading && (
-          <p className={`text-xs font-semibold mt-1 flex items-center gap-1 ${changeType === 'up' ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <p className={`text-xs font-semibold mt-1 flex items-center gap-1 ${changeType === 'up' ? 'text-emerald-600' : 'text-red-500'}`}>
             {changeType === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
             {change}
           </p>
@@ -133,14 +133,14 @@ export default function Dashboard() {
       {/* Header */}
       <motion.div variants={item} className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-black font-display text-white">
+          <h1 className="text-2xl font-black font-display text-slate-900">
             Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening'},{' '}
             <span className="gradient-text">{user?.name?.split(' ')[0] || 'Investor'} 👋</span>
           </h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1">
             {new Date().toLocaleDateString('en-IN', { weekday: 'long', month: 'long', day: 'numeric' })}
             {' '}· Markets are{' '}
-            <span className={isMarketOpen ? 'text-emerald-400 font-medium' : 'text-slate-500'}>{isMarketOpen ? 'open' : 'closed'}</span>
+            <span className={isMarketOpen ? 'text-emerald-600 font-medium' : 'text-slate-500'}>{isMarketOpen ? 'open' : 'closed'}</span>
           </p>
         </div>
         <div className="flex gap-2">
@@ -160,18 +160,18 @@ export default function Dashboard() {
 
       {/* AI Daily Brief */}
       <motion.div variants={item}
-        className="p-4 rounded-2xl border border-brand-500/30 bg-gradient-to-r from-brand-500/10 to-accent-violet/10 flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center flex-shrink-0">
-          <Sparkles className="w-5 h-5 text-brand-400" />
+        className="p-4 rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50 flex items-start gap-4">
+        <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
+          <Sparkles className="w-5 h-5 text-indigo-600" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm font-semibold text-brand-300">AI Daily Brief</span>
+            <span className="text-sm font-semibold text-indigo-700">AI Daily Brief</span>
             <span className="badge-brand text-2xs">LIVE</span>
           </div>
           {briefLoading
-            ? <div className="space-y-1.5"><div className="h-3 bg-white/5 rounded animate-pulse w-full" /><div className="h-3 bg-white/5 rounded animate-pulse w-3/4" /></div>
-            : <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line line-clamp-3">{dailyBrief || 'Loading your personalised market brief…'}</p>
+            ? <div className="space-y-1.5"><div className="h-3 bg-indigo-100 rounded animate-pulse w-full" /><div className="h-3 bg-indigo-100 rounded animate-pulse w-3/4" /></div>
+            : <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line line-clamp-3">{dailyBrief || 'Loading your personalised market brief…'}</p>
           }
         </div>
         <Link to="/app/ai-chat" className="btn-secondary text-xs px-3 py-1.5 flex-shrink-0">
@@ -181,38 +181,20 @@ export default function Dashboard() {
 
       {/* Stats Row */}
       <motion.div variants={item} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
-          loading={loading}
-          label="Portfolio Value" value={p ? fmtL(p.totalCurrentValue) : '—'}
+        <StatCard loading={loading} label="Portfolio Value" value={p ? fmtL(p.totalCurrentValue) : '—'}
           change={p ? `${p.dayPnl >= 0 ? '+' : ''}₹${fmt(Math.abs(p.dayPnl))} today` : undefined}
           changeType={!p || p.dayPnl >= 0 ? 'up' : 'down'}
-          icon={<TrendingUp className="w-5 h-5 text-brand-400" />}
-          gradient="bg-brand-500/10"
-        />
-        <StatCard
-          loading={loading}
-          label="Total Returns" value={p ? `${p.totalReturns >= 0 ? '+' : ''}₹${fmt(Math.abs(p.totalReturns))}` : '—'}
+          icon={<TrendingUp className="w-5 h-5 text-indigo-600" />} gradient="bg-indigo-50" />
+        <StatCard loading={loading} label="Total Returns" value={p ? `${p.totalReturns >= 0 ? '+' : ''}₹${fmt(Math.abs(p.totalReturns))}` : '—'}
           change={p ? `${p.returnsPercent >= 0 ? '+' : ''}${p.returnsPercent.toFixed(1)}% overall` : undefined}
           changeType={!p || p.returnsPercent >= 0 ? 'up' : 'down'}
-          icon={<ArrowUpRight className="w-5 h-5 text-emerald-400" />}
-          gradient="bg-emerald-500/10"
-        />
-        <StatCard
-          loading={loading}
-          label="Portfolio Health" value={p ? `${(p.healthScore||0).toFixed(0)}/100` : '—'}
-          change={p ? `CAGR: ${(p.cagr||0).toFixed(1)}%` : undefined}
-          changeType="up"
-          icon={<Shield className="w-5 h-5 text-amber-400" />}
-          gradient="bg-amber-500/10"
-        />
-        <StatCard
-          loading={loading}
-          label="AI Wealth Score" value={p ? `${Math.round(p.wealthScore||0)}/1000` : '—'}
-          change={p && p.wealthScore >= 600 ? 'Wealth Builder 🏆' : p ? 'Growing Investor 📈' : undefined}
-          changeType="up"
-          icon={<Sparkles className="w-5 h-5 text-violet-400" />}
-          gradient="bg-violet-500/10"
-        />
+          icon={<ArrowUpRight className="w-5 h-5 text-emerald-600" />} gradient="bg-emerald-50" />
+        <StatCard loading={loading} label="Portfolio Health" value={p ? `${(p.healthScore||0).toFixed(0)}/100` : '—'}
+          change={p ? `CAGR: ${(p.cagr||0).toFixed(1)}%` : undefined} changeType="up"
+          icon={<Shield className="w-5 h-5 text-amber-600" />} gradient="bg-amber-50" />
+        <StatCard loading={loading} label="AI Wealth Score" value={p ? `${Math.round(p.wealthScore||0)}/1000` : '—'}
+          change={p && p.wealthScore >= 600 ? 'Wealth Builder 🏆' : p ? 'Growing Investor 📈' : undefined} changeType="up"
+          icon={<Sparkles className="w-5 h-5 text-violet-600" />} gradient="bg-violet-50" />
       </motion.div>
 
       {/* Main Grid */}
@@ -222,30 +204,30 @@ export default function Dashboard() {
         <motion.div variants={item} className="lg:col-span-2 card-static p-5">
           <div className="flex items-center justify-between mb-5">
             <div>
-              <h2 className="text-base font-bold text-white font-display">Portfolio Performance</h2>
+              <h2 className="text-base font-bold text-slate-900 font-display">Portfolio Performance</h2>
               <p className="text-xs text-slate-500 mt-0.5">₹ in Lakhs · 12-month view</p>
             </div>
           </div>
           {perfLoading
-            ? <div className="h-[220px] bg-white/3 rounded-xl animate-pulse" />
+            ? <div className="h-[220px] bg-slate-50 rounded-xl animate-pulse" />
             : performance.length > 0 ? (
               <ResponsiveContainer width="100%" height={220}>
                 <AreaChart data={performance}>
                   <defs>
                     <linearGradient id="perfGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%"  stopColor="#667eea" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#667eea" stopOpacity={0.02} />
+                      <stop offset="5%"  stopColor="#4f46e5" stopOpacity={0.2} />
+                      <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.02} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                  <XAxis dataKey="month" tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `₹${v}L`} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `₹${v}L`} />
                   <Tooltip
-                    contentStyle={{ background: 'rgba(15,23,42,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12 }}
+                    contentStyle={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
                     formatter={(v: number) => [`₹${v}L`, 'Portfolio Value']}
                   />
-                  <Area type="monotone" dataKey="value" stroke="#667eea" strokeWidth={2.5}
-                    fill="url(#perfGrad)" dot={false} activeDot={{ r: 5, fill: '#667eea' }} />
+                  <Area type="monotone" dataKey="value" stroke="#4f46e5" strokeWidth={2.5}
+                    fill="url(#perfGrad)" dot={false} activeDot={{ r: 5, fill: '#4f46e5' }} />
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
@@ -258,9 +240,9 @@ export default function Dashboard() {
 
         {/* Asset Allocation Pie */}
         <motion.div variants={item} className="card-static p-5">
-          <h2 className="text-base font-bold text-white font-display mb-5">Asset Allocation</h2>
+          <h2 className="text-base font-bold text-slate-900 font-display mb-5">Asset Allocation</h2>
           {loading
-            ? <div className="h-40 bg-white/3 rounded-xl animate-pulse" />
+            ? <div className="h-40 bg-slate-50 rounded-xl animate-pulse" />
             : (p?.assetClassAllocation || []).length > 0 ? (
               <>
                 <ResponsiveContainer width="100%" height={160}>
@@ -272,7 +254,7 @@ export default function Dashboard() {
                       ))}
                     </Pie>
                     <Tooltip
-                      contentStyle={{ background: 'rgba(15,23,42,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12 }}
+                      contentStyle={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12 }}
                       formatter={(v: number) => [`${v.toFixed(1)}%`, 'Allocation']}
                     />
                   </PieChart>
@@ -281,8 +263,8 @@ export default function Dashboard() {
                   {p!.assetClassAllocation.map((a, i) => (
                     <div key={a.assetClass} className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: COLORS[i % COLORS.length] }} />
-                      <span className="text-xs text-slate-400 flex-1 capitalize">{a.assetClass.replace('_',' ')}</span>
-                      <span className="text-xs font-semibold text-white font-numeric">{a.percentage.toFixed(1)}%</span>
+                      <span className="text-xs text-slate-500 flex-1 capitalize">{a.assetClass.replace('_',' ')}</span>
+                      <span className="text-xs font-semibold text-slate-900 font-numeric">{a.percentage.toFixed(1)}%</span>
                     </div>
                   ))}
                 </div>
@@ -301,35 +283,31 @@ export default function Dashboard() {
 
         {/* Top Holdings */}
         <motion.div variants={item} className="lg:col-span-2 card-static">
-          <div className="flex items-center justify-between p-5 border-b border-white/5">
-            <h2 className="text-base font-bold text-white font-display">Top Holdings</h2>
-            <Link to="/app/portfolio" className="text-xs text-brand-400 hover:text-brand-300 flex items-center gap-1">
+          <div className="flex items-center justify-between p-5 border-b border-slate-100">
+            <h2 className="text-base font-bold text-slate-900 font-display">Top Holdings</h2>
+            <Link to="/app/portfolio" className="text-xs text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
               View All <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
           {loading
-            ? <div className="p-5 space-y-3">{[0,1,2].map(i => <div key={i} className="h-10 bg-white/5 rounded-xl animate-pulse" />)}</div>
+            ? <div className="p-5 space-y-3">{[0,1,2].map(i => <div key={i} className="h-10 bg-slate-50 rounded-xl animate-pulse" />)}</div>
             : topHoldings.length > 0 ? (
               <div className="overflow-x-auto">
                 <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Stock</th>
-                      <th className="text-right">Value</th>
-                      <th className="text-right">Alloc.</th>
-                      <th className="text-right">Day Change</th>
-                      <th className="text-right">Signal</th>
-                    </tr>
-                  </thead>
+                  <thead><tr>
+                    <th>Stock</th><th className="text-right">Value</th>
+                    <th className="text-right">Alloc.</th><th className="text-right">Day Change</th>
+                    <th className="text-right">Signal</th>
+                  </tr></thead>
                   <tbody>
                     {topHoldings.map(h => (
                       <tr key={h.id} className="group">
                         <td>
-                          <div className="font-semibold text-white text-sm">{h.symbol}</div>
+                          <div className="font-semibold text-slate-900 text-sm">{h.symbol}</div>
                           <div className="text-2xs text-slate-500 truncate max-w-32">{h.name}</div>
                         </td>
-                        <td className="text-right font-numeric text-sm">₹{fmt(h.currentValue)}</td>
-                        <td className="text-right text-sm">{(h.allocationPct||0).toFixed(1)}%</td>
+                        <td className="text-right font-numeric text-sm text-slate-700">₹{fmt(h.currentValue)}</td>
+                        <td className="text-right text-sm text-slate-600">{(h.allocationPct||0).toFixed(1)}%</td>
                         <td className={`text-right text-sm font-semibold font-numeric ${(h.dayChangePct||0) >= 0 ? 'profit' : 'loss'}`}>
                           {(h.dayChangePct||0) >= 0 ? '+' : ''}{(h.dayChangePct||0).toFixed(2)}%
                         </td>
@@ -351,41 +329,41 @@ export default function Dashboard() {
         {/* Weekly P&L + AI Insights */}
         <div className="space-y-4">
           <motion.div variants={item} className="card-static p-5">
-            <h3 className="text-sm font-bold text-white mb-4 font-display">This Week's P&L</h3>
+            <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">This Week's P&L</h3>
             {p ? (
               <>
                 <ResponsiveContainer width="100%" height={100}>
                   <BarChart data={weeklyPerf} barSize={20}>
                     <Bar dataKey="pnl" radius={[4,4,0,0]}>
-                      {weeklyPerf.map((d, i) => <Cell key={i} fill={d.pnl >= 0 ? '#10b981' : '#f43f5e'} />)}
+                      {weeklyPerf.map((d, i) => <Cell key={i} fill={d.pnl >= 0 ? '#059669' : '#dc2626'} />)}
                     </Bar>
-                    <XAxis dataKey="day" tick={{ fill: '#64748b', fontSize: 10 }} axisLine={false} tickLine={false} />
+                    <XAxis dataKey="day" tick={{ fill: '#94a3b8', fontSize: 10 }} axisLine={false} tickLine={false} />
                     <Tooltip
-                      contentStyle={{ background: 'rgba(15,23,42,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10, fontSize: 12 }}
+                      contentStyle={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, fontSize: 12 }}
                       formatter={(v: number) => [`₹${fmt(Math.abs(v))}`, v >= 0 ? '▲ Gain' : '▼ Loss']}
                     />
                   </BarChart>
                 </ResponsiveContainer>
                 <div className="mt-3 flex items-center justify-between">
                   <span className="text-xs text-slate-500">Day P&L</span>
-                  <span className={`text-sm font-bold font-numeric ${p.dayPnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <span className={`text-sm font-bold font-numeric ${p.dayPnl >= 0 ? 'profit' : 'loss'}`}>
                     {p.dayPnl >= 0 ? '+' : ''}₹{fmt(p.dayPnl)}
                   </span>
                 </div>
               </>
-            ) : <div className="h-24 flex items-center justify-center text-slate-600 text-xs">No portfolio data</div>}
+            ) : <div className="h-24 flex items-center justify-center text-slate-500 text-xs">No portfolio data</div>}
           </motion.div>
 
           <motion.div variants={item} className="card-static p-5">
             <div className="flex items-center gap-2 mb-4">
-              <Brain className="w-4 h-4 text-brand-400" />
-              <h3 className="text-sm font-bold text-white font-display">AI Insights</h3>
+              <Brain className="w-4 h-4 text-indigo-600" />
+              <h3 className="text-sm font-bold text-slate-900 font-display">AI Insights</h3>
             </div>
             <div className="space-y-3">
               {aiInsights.map((insight, i) => (
-                <div key={i} className="flex gap-2.5 p-2.5 rounded-xl bg-white/5">
+                <div key={i} className="flex gap-2.5 p-2.5 rounded-xl bg-indigo-50">
                   <span className="text-base flex-shrink-0">{insight.icon}</span>
-                  <p className="text-xs text-slate-300 leading-relaxed">{insight.text}</p>
+                  <p className="text-xs text-slate-700 leading-relaxed">{insight.text}</p>
                 </div>
               ))}
             </div>
@@ -398,18 +376,18 @@ export default function Dashboard() {
 
       {/* Quick Actions */}
       <motion.div variants={item}>
-        <h2 className="text-sm font-semibold text-slate-400 mb-3 uppercase tracking-wider">Quick Actions</h2>
+        <h2 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wider">Quick Actions</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
-            { icon: '🧠', label: 'Analyze Portfolio',  to: '/app/ai-chat',        color: 'border-brand-500/20 hover:border-brand-500/40 hover:bg-brand-500/5' },
-            { icon: '🎯', label: 'Update Goals',        to: '/app/goals',           color: 'border-emerald-500/20 hover:border-emerald-500/40 hover:bg-emerald-500/5' },
-            { icon: '🛡️', label: 'Risk Check',          to: '/app/risk-simulator',  color: 'border-rose-500/20 hover:border-rose-500/40 hover:bg-rose-500/5' },
-            { icon: '📊', label: 'Generate Report',     to: '/app/reports',          color: 'border-amber-500/20 hover:border-amber-500/40 hover:bg-amber-500/5' },
+            { icon: '🧠', label: 'Analyze Portfolio', to: '/app/ai-chat',       color: 'hover:border-indigo-200 hover:bg-indigo-50' },
+            { icon: '🎯', label: 'Update Goals',       to: '/app/goals',         color: 'hover:border-emerald-200 hover:bg-emerald-50' },
+            { icon: '🛡️', label: 'Risk Check',         to: '/app/risk-simulator',color: 'hover:border-red-200 hover:bg-red-50' },
+            { icon: '📊', label: 'Generate Report',    to: '/app/reports',       color: 'hover:border-amber-200 hover:bg-amber-50' },
           ].map(a => (
             <Link key={a.label} to={a.to}
-              className={`card-static p-4 flex flex-col items-center gap-2 text-center border ${a.color} transition-all cursor-pointer`}>
+              className={`card-static p-4 flex flex-col items-center gap-2 text-center ${a.color} transition-all cursor-pointer`}>
               <span className="text-2xl">{a.icon}</span>
-              <span className="text-xs font-medium text-slate-300">{a.label}</span>
+              <span className="text-xs font-medium text-slate-600">{a.label}</span>
             </Link>
           ))}
         </div>

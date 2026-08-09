@@ -47,14 +47,14 @@ export default function MarketMood() {
   return (
     <div className="space-y-6 max-w-screen-xl">
       <div>
-        <h1 className="text-2xl font-black font-display text-white">Market Mood</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Fear & Greed Index + Real-time Market Sentiment</p>
+        <h1 className="text-2xl font-black font-display text-slate-900">Market Mood</h1>
+        <p className="text-slate-500 text-sm mt-0.5">Fear & Greed Index + Real-time Market Sentiment</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Fear & Greed Gauge */}
         <div className="card-static p-6 flex flex-col items-center">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">Fear & Greed Index</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Fear & Greed Index</h3>
           {/* SVG Gauge */}
           <svg viewBox="0 0 200 110" className="w-48">
             <defs>
@@ -87,7 +87,7 @@ export default function MarketMood() {
             {history.map(h => (
               <div key={h.label} className="flex justify-between text-xs">
                 <span className="text-slate-500">{h.label}</span>
-                <span className="font-semibold text-white">{h.value} — <span className="text-slate-400">{h.label2}</span></span>
+                <span className="font-semibold text-slate-900">{h.value} — <span className="text-slate-500">{h.label2}</span></span>
               </div>
             ))}
           </div>
@@ -95,32 +95,32 @@ export default function MarketMood() {
 
         {/* Market Summary */}
         <div className="card-static p-5">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">Live Market Snapshot</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Live Market Snapshot</h3>
           <div className="space-y-3">
             {marketSummary.map(m => (
               <div key={m.index} className="flex items-center justify-between">
-                <span className="text-xs text-slate-400">{m.index}</span>
+                <span className="text-xs text-slate-500">{m.index}</span>
                 <div className="text-right">
-                  <div className="text-xs font-semibold text-white font-numeric">{m.value}</div>
-                  <div className={`text-2xs font-semibold ${m.up ? 'text-emerald-400' : 'text-rose-400'}`}>{m.change}</div>
+                  <div className="text-xs font-semibold text-slate-900 font-numeric">{m.value}</div>
+                  <div className={`text-2xs font-semibold ${m.up ? 'text-emerald-600' : 'text-red-500'}`}>{m.change}</div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-4 p-3 rounded-lg bg-brand-500/10 border border-brand-500/20 text-xs text-brand-300">
+          <div className="mt-4 p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-xs text-brand-300">
             <strong>AI Take:</strong> Market is in mild Greed territory. Momentum indicators are bullish but VIX near support — stay cautious. Your portfolio is well-positioned.
           </div>
         </div>
 
         {/* Indicator Breakdown */}
         <div className="card-static p-5">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">Indicator Breakdown</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Indicator Breakdown</h3>
           <div className="space-y-3">
             {indicators.map(ind => (
               <div key={ind.name}>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-slate-400">{ind.name}</span>
-                  <span className={ind.value >= 50 ? 'text-emerald-400' : 'text-rose-400'}>{ind.label}</span>
+                  <span className="text-slate-500">{ind.name}</span>
+                  <span className={ind.value >= 50 ? 'text-emerald-600' : 'text-red-500'}>{ind.label}</span>
                 </div>
                 <div className="progress-bar">
                   <div className="h-full rounded-full" style={{

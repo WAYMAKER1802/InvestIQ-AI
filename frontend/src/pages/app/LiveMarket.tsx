@@ -127,7 +127,7 @@ export default function LiveMarket() {
       
       {/* Most Traded Stocks */}
       <div>
-        <h2 className="text-xl font-bold text-white font-display mb-4">Most traded stocks on InvestIQ</h2>
+        <h2 className="text-xl font-bold text-slate-900 font-display mb-4">Most traded stocks on InvestIQ</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {mostTraded.map(stock => (
             <motion.div 
@@ -141,19 +141,19 @@ export default function LiveMarket() {
                 disabled={addedSymbols.includes(stock.symbol)}
                 className={`absolute top-3 right-3 p-1.5 rounded-full transition-opacity ${
                   addedSymbols.includes(stock.symbol)
-                    ? 'opacity-100 bg-brand-500 text-white cursor-default'
-                    : 'bg-white/5 opacity-0 group-hover:opacity-100 hover:bg-brand-500 hover:text-white'
+                    ? 'opacity-100 bg-indigo-600 text-slate-900 cursor-default'
+                    : 'bg-slate-50 opacity-0 group-hover:opacity-100 hover:bg-indigo-600 hover:text-slate-900'
                 }`}
                 title="Add to Watchlist"
               >
                 {addedSymbols.includes(stock.symbol) ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
               </button>
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold mb-4">
+              <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold mb-4">
                 {stock.name[0]}
               </div>
-              <div className="text-sm font-semibold text-slate-300 mb-2">{stock.name}</div>
-              <div className="text-lg font-bold text-white font-numeric">₹{stock.price}</div>
-              <div className={`text-xs font-semibold ${stock.up ? 'text-emerald-400' : 'text-rose-400'}`}>
+              <div className="text-sm font-semibold text-slate-600 mb-2">{stock.name}</div>
+              <div className="text-lg font-bold text-slate-900 font-numeric">₹{stock.price}</div>
+              <div className={`text-xs font-semibold ${stock.up ? 'text-emerald-600' : 'text-red-500'}`}>
                 {stock.change} ({stock.percent})
               </div>
             </motion.div>
@@ -165,14 +165,14 @@ export default function LiveMarket() {
         
         {/* Left Column (Top Movers) */}
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-xl font-bold text-white font-display">Top movers today</h2>
+          <h2 className="text-xl font-bold text-slate-900 font-display">Top movers today</h2>
           <div className="flex items-center gap-2 mb-4">
             {['Gainers', 'Losers', 'Volume shockers'].map(tab => (
               <button 
                 key={tab} 
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
-                  activeTab === tab ? 'bg-brand-500 text-white' : 'bg-white/5 text-slate-400 hover:bg-white/10'
+                  activeTab === tab ? 'bg-indigo-600 text-slate-900' : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
                 }`}
               >
                 {tab}
@@ -183,7 +183,7 @@ export default function LiveMarket() {
           <div className="card-static overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-white/5 text-xs text-slate-400 uppercase tracking-wider">
+                <tr className="border-b border-slate-100 text-xs text-slate-500 uppercase tracking-wider">
                   <th className="p-4 font-semibold">Company</th>
                   <th className="p-4 font-semibold text-right">Market Price</th>
                   <th className="p-4 font-semibold text-right">Watchlist</th>
@@ -194,15 +194,15 @@ export default function LiveMarket() {
                   <tr 
                     key={stock.symbol} 
                     onClick={() => navigate(`/app/stock/${stock.symbol}`)}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer group"
+                    className="border-b border-slate-100 hover:bg-slate-50 transition-colors cursor-pointer group"
                   >
                     <td className="p-4">
-                      <div className="text-sm font-bold text-white">{stock.name}</div>
+                      <div className="text-sm font-bold text-slate-900">{stock.name}</div>
                       <div className="text-xs text-slate-500">{stock.symbol}</div>
                     </td>
                     <td className="p-4 text-right">
-                      <div className="text-sm font-bold text-white font-numeric">₹{stock.price}</div>
-                      <div className={`text-xs font-semibold ${stock.up ? 'text-emerald-400' : 'text-rose-400'}`}>
+                      <div className="text-sm font-bold text-slate-900 font-numeric">₹{stock.price}</div>
+                      <div className={`text-xs font-semibold ${stock.up ? 'text-emerald-600' : 'text-red-500'}`}>
                         {stock.percent}
                       </div>
                     </td>
@@ -212,8 +212,8 @@ export default function LiveMarket() {
                         disabled={addedSymbols.includes(stock.symbol)}
                         className={`p-2 rounded-lg transition-colors ${
                           addedSymbols.includes(stock.symbol)
-                            ? 'bg-brand-500 text-white cursor-default'
-                            : 'bg-white/5 hover:bg-brand-500 hover:text-white'
+                            ? 'bg-indigo-600 text-slate-900 cursor-default'
+                            : 'bg-slate-50 hover:bg-indigo-600 hover:text-slate-900'
                         }`}
                       >
                         {addedSymbols.includes(stock.symbol) ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
@@ -231,36 +231,36 @@ export default function LiveMarket() {
           
           {/* Your Investments Mini-Card */}
           <div>
-            <h2 className="text-xl font-bold text-white font-display mb-4">Your investments</h2>
+            <h2 className="text-xl font-bold text-slate-900 font-display mb-4">Your investments</h2>
             <div className="card-static p-5 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10">
                 <TrendingUp className="w-16 h-16" />
               </div>
-              <div className="text-sm text-slate-400 mb-1">Current Value</div>
-              <div className="text-3xl font-black text-white font-numeric mb-6">
+              <div className="text-sm text-slate-500 mb-1">Current Value</div>
+              <div className="text-3xl font-black text-slate-900 font-numeric mb-6">
                 ₹{activePortfolio ? activePortfolio.totalCurrentValue.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : '0'}
               </div>
               
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-400">1D returns</span>
-                  <span className={`font-semibold font-numeric ${activePortfolio && activePortfolio.dayPnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <span className="text-slate-500">1D returns</span>
+                  <span className={`font-semibold font-numeric ${activePortfolio && activePortfolio.dayPnl >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                     {activePortfolio && activePortfolio.dayPnl > 0 ? '+' : ''}
                     ₹{activePortfolio ? activePortfolio.dayPnl.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : '0'} 
                     ({activePortfolio ? activePortfolio.dayPnlPercent.toFixed(2) : '0.00'}%)
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-400">Total returns</span>
-                  <span className={`font-semibold font-numeric ${activePortfolio && activePortfolio.totalReturns >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <span className="text-slate-500">Total returns</span>
+                  <span className={`font-semibold font-numeric ${activePortfolio && activePortfolio.totalReturns >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                     {activePortfolio && activePortfolio.totalReturns > 0 ? '+' : ''}
                     ₹{activePortfolio ? activePortfolio.totalReturns.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : '0'} 
                     ({activePortfolio ? activePortfolio.returnsPercent.toFixed(2) : '0.00'}%)
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-400">Invested</span>
-                  <span className="text-white font-semibold font-numeric">
+                  <span className="text-slate-500">Invested</span>
+                  <span className="text-slate-900 font-semibold font-numeric">
                     ₹{activePortfolio ? activePortfolio.totalInvested.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : '0'}
                   </span>
                 </div>
@@ -270,26 +270,26 @@ export default function LiveMarket() {
 
           {/* Products & Tools */}
           <div>
-            <h2 className="text-xl font-bold text-white font-display mb-4">Products & Tools</h2>
+            <h2 className="text-xl font-bold text-slate-900 font-display mb-4">Products & Tools</h2>
             <div className="grid grid-cols-2 gap-4">
               <div className="card-static p-4 hover:border-brand-500/30 cursor-pointer transition-colors flex flex-col items-center justify-center text-center">
-                <div className="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center mb-2">
-                  <ExternalLink className="w-5 h-5 text-brand-400" />
+                <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center mb-2">
+                  <ExternalLink className="w-5 h-5 text-indigo-600" />
                 </div>
-                <div className="text-sm font-semibold text-white">IPO</div>
-                <div className="text-xs text-emerald-400 mt-1">4 open</div>
+                <div className="text-sm font-semibold text-slate-900">IPO</div>
+                <div className="text-xs text-emerald-600 mt-1">4 open</div>
               </div>
               <div className="card-static p-4 hover:border-brand-500/30 cursor-pointer transition-colors flex flex-col items-center justify-center text-center">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center mb-2">
-                  <TrendingUp className="w-5 h-5 text-amber-400" />
+                <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center mb-2">
+                  <TrendingUp className="w-5 h-5 text-amber-600" />
                 </div>
-                <div className="text-sm font-semibold text-white">Bonds</div>
+                <div className="text-sm font-semibold text-slate-900">Bonds</div>
               </div>
               <div className="card-static p-4 hover:border-brand-500/30 cursor-pointer transition-colors flex flex-col items-center justify-center text-center">
                 <div className="w-10 h-10 rounded-full bg-violet-500/10 flex items-center justify-center mb-2">
-                  <TrendingDown className="w-5 h-5 text-violet-400" />
+                  <TrendingDown className="w-5 h-5 text-violet-600" />
                 </div>
-                <div className="text-sm font-semibold text-white">ETFs</div>
+                <div className="text-sm font-semibold text-slate-900">ETFs</div>
               </div>
             </div>
           </div>

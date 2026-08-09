@@ -23,8 +23,8 @@ const SIPCalc = () => {
       ].map(f => (
         <div key={f.label}>
           <div className="flex justify-between text-xs mb-2">
-            <label className="text-slate-400">{f.label}</label>
-            <span className="font-semibold text-white font-numeric">{f.label.includes('₹') ? `₹${f.value.toLocaleString('en-IN')}` : f.label.includes('%') ? `${f.value}%` : `${f.value} yrs`}</span>
+            <label className="text-slate-500">{f.label}</label>
+            <span className="font-semibold text-slate-900 font-numeric">{f.label.includes('₹') ? `₹${f.value.toLocaleString('en-IN')}` : f.label.includes('%') ? `${f.value}%` : `${f.value} yrs`}</span>
           </div>
           <input type="range" min={f.min} max={f.max} step={f.step} value={f.value}
             onChange={e => f.setter(Number(e.target.value))}
@@ -32,13 +32,13 @@ const SIPCalc = () => {
         </div>
       ))}
 
-      <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/5">
+      <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100">
         {[
-          { label: 'Total Invested', value: `₹${(invested / 100000).toFixed(1)}L`,   color: 'text-white'  },
-          { label: 'Estimated Gains', value: `₹${(gains / 100000).toFixed(1)}L`,     color: 'text-emerald-400' },
+          { label: 'Total Invested', value: `₹${(invested / 100000).toFixed(1)}L`,   color: 'text-slate-900'  },
+          { label: 'Estimated Gains', value: `₹${(gains / 100000).toFixed(1)}L`,     color: 'text-emerald-600' },
           { label: 'Corpus at End',   value: `₹${(fv / 100000).toFixed(1)}L`,        color: 'gradient-text' },
         ].map(r => (
-          <div key={r.label} className="text-center p-3 rounded-xl bg-white/5">
+          <div key={r.label} className="text-center p-3 rounded-xl bg-slate-50">
             <div className={`text-lg font-black font-display ${r.color}`}>{r.value}</div>
             <div className="text-2xs text-slate-500 mt-1">{r.label}</div>
           </div>
@@ -69,21 +69,21 @@ const EMICalc = () => {
       ].map(f => (
         <div key={f.label}>
           <div className="flex justify-between text-xs mb-2">
-            <label className="text-slate-400">{f.label}</label>
-            <span className="font-semibold text-white font-numeric">{f.label.includes('₹') ? `₹${f.value.toLocaleString('en-IN')}` : f.label.includes('%') ? `${f.value}%` : `${f.value} yrs`}</span>
+            <label className="text-slate-500">{f.label}</label>
+            <span className="font-semibold text-slate-900 font-numeric">{f.label.includes('₹') ? `₹${f.value.toLocaleString('en-IN')}` : f.label.includes('%') ? `${f.value}%` : `${f.value} yrs`}</span>
           </div>
           <input type="range" min={f.min} max={f.max} step={f.step} value={f.value}
             onChange={e => f.setter(Number(e.target.value))} className="w-full" style={{ accentColor: '#667eea' }} />
         </div>
       ))}
 
-      <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/5">
+      <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100">
         {[
           { label: 'Monthly EMI',    value: `₹${Math.round(emi).toLocaleString('en-IN')}`,     color: 'gradient-text' },
-          { label: 'Total Interest', value: `₹${(interest / 100000).toFixed(1)}L`,              color: 'text-rose-400' },
-          { label: 'Total Payment',  value: `₹${(totalAmt / 100000).toFixed(1)}L`,              color: 'text-white' },
+          { label: 'Total Interest', value: `₹${(interest / 100000).toFixed(1)}L`,              color: 'text-red-500' },
+          { label: 'Total Payment',  value: `₹${(totalAmt / 100000).toFixed(1)}L`,              color: 'text-slate-900' },
         ].map(r => (
-          <div key={r.label} className="text-center p-3 rounded-xl bg-white/5">
+          <div key={r.label} className="text-center p-3 rounded-xl bg-slate-50">
             <div className={`text-lg font-black font-display ${r.color}`}>{r.value}</div>
             <div className="text-2xs text-slate-500 mt-1">{r.label}</div>
           </div>
@@ -111,19 +111,19 @@ const CAGRCalc = () => {
       ].map(f => (
         <div key={f.label}>
           <div className="flex justify-between text-xs mb-2">
-            <label className="text-slate-400">{f.label}</label>
-            <span className="font-semibold text-white font-numeric">{f.label.includes('₹') ? `₹${f.value.toLocaleString('en-IN')}` : `${f.value} yrs`}</span>
+            <label className="text-slate-500">{f.label}</label>
+            <span className="font-semibold text-slate-900 font-numeric">{f.label.includes('₹') ? `₹${f.value.toLocaleString('en-IN')}` : `${f.value} yrs`}</span>
           </div>
           <input type="range" min={f.min} max={f.max} step={f.step} value={f.value}
             onChange={e => f.setter(Number(e.target.value))} className="w-full" style={{ accentColor: '#667eea' }} />
         </div>
       ))}
-      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-white/5">
+      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100">
         {[
           { label: 'CAGR',             value: `${cagr.toFixed(2)}%`, color: 'gradient-text' },
-          { label: 'Absolute Returns', value: `${totalRet.toFixed(1)}%`, color: 'text-emerald-400' },
+          { label: 'Absolute Returns', value: `${totalRet.toFixed(1)}%`, color: 'text-emerald-600' },
         ].map(r => (
-          <div key={r.label} className="text-center p-4 rounded-xl bg-white/5">
+          <div key={r.label} className="text-center p-4 rounded-xl bg-slate-50">
             <div className={`text-2xl font-black font-display ${r.color}`}>{r.value}</div>
             <div className="text-xs text-slate-500 mt-1">{r.label}</div>
           </div>
@@ -147,16 +147,16 @@ export default function Calculators() {
   return (
     <div className="space-y-6 max-w-2xl">
       <div>
-        <h1 className="text-2xl font-black font-display text-white">Financial Calculators</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Plan smarter with precision financial tools</p>
+        <h1 className="text-2xl font-black font-display text-slate-900">Financial Calculators</h1>
+        <p className="text-slate-500 text-sm mt-0.5">Plan smarter with precision financial tools</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 p-1 rounded-xl bg-white/5 border border-white/10">
+      <div className="flex gap-2 p-1 rounded-xl bg-slate-50 border border-slate-200">
         {tabs.map(t => (
           <button key={t.id} onClick={() => setActiveTab(t.id)}
             className={`flex-1 py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-              activeTab === t.id ? 'bg-brand-500/20 text-brand-300 border border-brand-500/30' : 'text-slate-500 hover:text-white'
+              activeTab === t.id ? 'bg-indigo-600/20 text-brand-300 border border-brand-500/30' : 'text-slate-500 hover:text-slate-900'
             }`}>
             {t.label}
           </button>

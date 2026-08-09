@@ -72,8 +72,8 @@ export default function RegisterPage() {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
       <div className="mb-8">
-        <h1 className="text-3xl font-black font-display text-white mb-2">Create your account</h1>
-        <p className="text-slate-400 text-sm">Start your AI-powered investing journey</p>
+        <h1 className="text-3xl font-black text-slate-900 mb-2" style={{ fontFamily: 'Outfit, sans-serif' }}>Create your account</h1>
+        <p className="text-slate-500 text-sm">Start your AI-powered investing journey</p>
       </div>
 
       {/* Step Indicator */}
@@ -81,16 +81,16 @@ export default function RegisterPage() {
         {[1, 2].map(s => (
           <div key={s} className="flex items-center gap-2">
             <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-              s < step ? 'bg-emerald-500 text-white' :
-              s === step ? 'bg-brand-500 text-white' :
-              'bg-white/10 text-slate-500'
+              s < step ? 'bg-emerald-500 text-slate-900' :
+              s === step ? 'bg-indigo-600 text-slate-900' :
+              'bg-slate-100 text-slate-500'
             }`}>
               {s < step ? <CheckCircle2 className="w-4 h-4" /> : s}
             </div>
-            <span className={`text-xs ${s === step ? 'text-white font-medium' : 'text-slate-500'}`}>
+            <span className={`text-xs ${s === step ? 'text-slate-900 font-medium' : 'text-slate-500'}`}>
               {s === 1 ? 'Basic Info' : 'Risk Profile'}
             </span>
-            {s < 2 && <div className="w-8 h-px bg-white/10" />}
+            {s < 2 && <div className="w-8 h-px bg-slate-200" />}
           </div>
         ))}
       </div>
@@ -106,7 +106,7 @@ export default function RegisterPage() {
                 <input {...register('name')} type="text" id="name" placeholder="Arjun Sharma"
                   className={`input pl-10 ${errors.name ? 'border-rose-500/60' : ''}`} />
               </div>
-              {errors.name && <p className="text-xs text-rose-400 mt-1">{errors.name.message}</p>}
+              {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>}
             </div>
 
             {/* Phone */}
@@ -117,7 +117,7 @@ export default function RegisterPage() {
                 <input {...register('phone')} type="tel" id="phone" placeholder="9876543210"
                   className={`input pl-10 ${errors.phone ? 'border-rose-500/60' : ''}`} />
               </div>
-              {errors.phone && <p className="text-xs text-rose-400 mt-1">{errors.phone?.message as string}</p>}
+              {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone?.message as string}</p>}
             </div>
 
             {/* Email */}
@@ -128,7 +128,7 @@ export default function RegisterPage() {
                 <input {...register('email')} type="email" id="email" placeholder="you@example.com"
                   className={`input pl-10 ${errors.email ? 'border-rose-500/60' : ''}`} />
               </div>
-              {errors.email && <p className="text-xs text-rose-400 mt-1">{errors.email.message}</p>}
+              {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
             </div>
 
             {/* Password */}
@@ -140,7 +140,7 @@ export default function RegisterPage() {
                   placeholder="Min. 8 chars, 1 uppercase, 1 number"
                   className={`input pl-10 pr-10 ${errors.password ? 'border-rose-500/60' : ''}`} />
                 <button type="button" onClick={() => setShowPass(!showPass)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600">
                   {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
@@ -151,11 +151,11 @@ export default function RegisterPage() {
                     {[1,2,3,4].map(i => (
                       <div key={i} className={`flex-1 h-1 rounded-full transition-all ${
                         i <= strength
-                          ? strength <= 1 ? 'bg-rose-500'
-                          : strength <= 2 ? 'bg-amber-500'
-                          : strength <= 3 ? 'bg-yellow-400'
-                          : 'bg-emerald-500'
-                          : 'bg-white/10'
+                        ? strength <= 1 ? 'bg-red-500'
+                        : strength <= 2 ? 'bg-amber-500'
+                        : strength <= 3 ? 'bg-yellow-400'
+                        : 'bg-emerald-500'
+                        : 'bg-slate-200'
                       }`} />
                     ))}
                   </div>
@@ -164,7 +164,7 @@ export default function RegisterPage() {
                   </p>
                 </div>
               )}
-              {errors.password && <p className="text-xs text-rose-400 mt-1">{errors.password.message}</p>}
+              {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>}
             </div>
 
             <button type="button" onClick={goToStep2} id="next-step-btn" className="btn-primary w-full py-3 text-sm">
@@ -174,7 +174,7 @@ export default function RegisterPage() {
             {/* Divider */}
             <div className="my-6 flex items-center gap-3">
               <div className="flex-1 divider" />
-              <span className="text-xs text-slate-600">or sign up with</span>
+              <span className="text-xs text-slate-500">or sign up with</span>
               <div className="flex-1 divider" />
             </div>
 
@@ -199,7 +199,7 @@ export default function RegisterPage() {
                   toast.error('Google Sign-up was unsuccessful or cancelled.');
                 }}
                 useOneTap
-                theme="filled_black"
+                theme="outline"
                 shape="circle"
                 width="100%"
                 text="continue_with"
@@ -210,7 +210,7 @@ export default function RegisterPage() {
 
         {step === 2 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <p className="text-sm text-slate-400 mb-6">
+            <p className="text-sm text-slate-500 mb-6">
               What best describes your investment style? This helps us personalize your experience.
             </p>
             <div className="grid grid-cols-2 gap-3">
@@ -218,20 +218,20 @@ export default function RegisterPage() {
                 <label key={p.value}
                   className={`relative flex flex-col p-4 rounded-xl border cursor-pointer transition-all ${
                     watch('riskProfile') === p.value
-                      ? 'border-brand-500/60 bg-brand-500/10'
-                      : 'border-white/10 hover:border-white/20 bg-white/5'
+                      ? 'border-indigo-400 bg-indigo-50'
+                      : 'border-slate-200 hover:border-slate-300 bg-white'
                   }`}>
                   <input {...register('riskProfile')} type="radio" value={p.value} className="sr-only" />
                   <span className="text-lg mb-1">{p.label.split(' ')[0]}</span>
-                  <span className="text-xs font-semibold text-white">{p.label.split(' ').slice(1).join(' ')}</span>
+                  <span className="text-xs font-semibold text-slate-900">{p.label.split(' ').slice(1).join(' ')}</span>
                   <span className="text-2xs text-slate-500 mt-0.5">{p.desc}</span>
                   {watch('riskProfile') === p.value && (
-                    <CheckCircle2 className="absolute top-2 right-2 w-4 h-4 text-brand-400" />
+                    <CheckCircle2 className="absolute top-2 right-2 w-4 h-4 text-indigo-600" />
                   )}
                 </label>
               ))}
             </div>
-            <p className="text-sm text-slate-400 mt-6 mb-4">
+            <p className="text-sm text-slate-500 mt-6 mb-4">
               What is your investment horizon?
             </p>
             <div className="grid grid-cols-1 gap-3">
@@ -243,16 +243,16 @@ export default function RegisterPage() {
                 <label key={p.value}
                   className={`relative flex items-center p-4 rounded-xl border cursor-pointer transition-all ${
                     watch('investmentHorizon') === p.value
-                      ? 'border-brand-500/60 bg-brand-500/10'
-                      : 'border-white/10 hover:border-white/20 bg-white/5'
+                      ? 'border-indigo-400 bg-indigo-50'
+                      : 'border-slate-200 hover:border-slate-300 bg-white'
                   }`}>
                   <input {...register('investmentHorizon')} type="radio" value={p.value} className="sr-only" />
                   <div className="flex flex-col flex-1">
-                    <span className="text-sm font-semibold text-white">{p.label}</span>
+                    <span className="text-sm font-semibold text-slate-900">{p.label}</span>
                     <span className="text-xs text-slate-500">{p.desc}</span>
                   </div>
                   {watch('investmentHorizon') === p.value && (
-                    <CheckCircle2 className="w-5 h-5 text-brand-400" />
+                    <CheckCircle2 className="w-5 h-5 text-indigo-600" />
                   )}
                 </label>
               ))}
@@ -272,7 +272,7 @@ export default function RegisterPage() {
 
       <p className="text-center text-sm text-slate-500 mt-6">
         Already have an account?{' '}
-        <Link to="/login" className="text-brand-400 hover:text-brand-300 font-medium">Sign in</Link>
+        <Link to="/login" className="text-indigo-600 hover:text-indigo-800 font-medium">Sign in</Link>
       </p>
     </motion.div>
   );

@@ -16,7 +16,7 @@ const severityStyles: Record<string, string> = {
   critical: 'border-l-4 border-l-rose-500 bg-rose-500/5',
   warning : 'border-l-4 border-l-amber-500 bg-amber-500/5',
   success : 'border-l-4 border-l-emerald-500 bg-emerald-500/5',
-  info    : 'border-l-4 border-l-brand-500 bg-brand-500/5',
+  info    : 'border-l-4 border-l-brand-500 bg-indigo-600/5',
 };
 
 export default function Alerts() {
@@ -46,17 +46,17 @@ export default function Alerts() {
     <div className="space-y-6 max-w-3xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black font-display text-white flex items-center gap-3">
+          <h1 className="text-2xl font-black font-display text-slate-900 flex items-center gap-3">
             Smart Alerts
             {unreadCount > 0 && (
               <span className="text-sm badge-loss px-2 py-0.5">{unreadCount} unread</span>
             )}
           </h1>
-          <p className="text-slate-400 text-sm mt-0.5">AI-powered portfolio notifications</p>
+          <p className="text-slate-500 text-sm mt-0.5">AI-powered portfolio notifications</p>
         </div>
         <div className="flex gap-2">
           <button onClick={markAllRead} className="btn-secondary text-xs gap-1.5 py-2"><CheckCheck className="w-4 h-4" /> Mark All Read</button>
-          <button onClick={clearRead} className="btn-secondary text-xs gap-1.5 py-2"><Trash2 className="w-4 h-4 text-rose-400" /> Clear Read</button>
+          <button onClick={clearRead} className="btn-secondary text-xs gap-1.5 py-2"><Trash2 className="w-4 h-4 text-red-500" /> Clear Read</button>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ export default function Alerts() {
           {alerts.length === 0 ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12 card-static">
               <BellOff className="w-8 h-8 text-slate-500 mx-auto mb-3" />
-              <p className="text-slate-400">You're all caught up! No new alerts.</p>
+              <p className="text-slate-500">You're all caught up! No new alerts.</p>
             </motion.div>
           ) : (
             alerts.map((alert, i) => (
@@ -77,12 +77,12 @@ export default function Alerts() {
                 exit={{ opacity: 0, scale: 0.9, height: 0, marginBottom: 0 }}
                 transition={{ delay: i * 0.05 }}
                 onClick={() => handleAlertClick(alert)}
-                className={`rounded-xl p-4 flex gap-4 cursor-pointer transition-all hover:bg-white/5 ${severityStyles[alert.severity]} ${!alert.read ? '' : 'opacity-60'}`}
+                className={`rounded-xl p-4 flex gap-4 cursor-pointer transition-all hover:bg-slate-50 ${severityStyles[alert.severity]} ${!alert.read ? '' : 'opacity-60'}`}
               >
             <span className="text-xl flex-shrink-0">{alert.icon}</span>
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-2">
-                <h3 className={`text-sm font-semibold ${alert.read ? 'text-slate-300' : 'text-white'}`}>
+                <h3 className={`text-sm font-semibold ${alert.read ? 'text-slate-600' : 'text-slate-900'}`}>
                   {alert.title}
                 </h3>
                 <div className="flex items-center gap-1 flex-shrink-0">
@@ -90,7 +90,7 @@ export default function Alerts() {
                   <span className="text-2xs text-slate-500">{alert.time}</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-400 mt-1 leading-relaxed">{alert.message}</p>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed">{alert.message}</p>
               {alert.symbol && (
                 <span className="badge-brand text-2xs mt-2 inline-block">{alert.symbol}</span>
               )}

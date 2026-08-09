@@ -130,15 +130,15 @@ export default function Profile() {
   return (
     <div className="space-y-6 w-full max-w-7xl mx-auto">
       <div>
-        <h1 className="text-2xl font-black font-display text-white">My Profile</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Manage your personal information</p>
+        <h1 className="text-2xl font-black font-display text-slate-900">My Profile</h1>
+        <p className="text-slate-500 text-sm mt-0.5">Manage your personal information</p>
       </div>
 
       {/* Profile Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="card-static p-6 flex flex-col sm:flex-row items-start gap-6">
         <div className="relative">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-3xl font-bold text-white shadow-glow">
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-3xl font-bold text-slate-900 shadow-glow">
             {user?.avatar ? (
                <img src={user.avatar} alt="Avatar" className="w-full h-full rounded-2xl object-cover" />
             ) : (
@@ -155,17 +155,17 @@ export default function Profile() {
           <button 
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
-            className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-dark-800 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all z-10 cursor-pointer"
+            className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-dark-800 border border-slate-200 flex items-center justify-center hover:bg-slate-100 transition-all z-10 cursor-pointer"
           >
-            {isUploading ? <Loader2 className="w-3.5 h-3.5 text-slate-400 animate-spin" /> : <Camera className="w-3.5 h-3.5 text-slate-400" />}
+            {isUploading ? <Loader2 className="w-3.5 h-3.5 text-slate-500 animate-spin" /> : <Camera className="w-3.5 h-3.5 text-slate-500" />}
           </button>
         </div>
 
         <div className="flex-1">
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="text-xl font-black font-display text-white">{user?.name || 'Investor'}</h2>
-              <p className="text-slate-400 text-sm">{user?.email}</p>
+              <h2 className="text-xl font-black font-display text-slate-900">{user?.name || 'Investor'}</h2>
+              <p className="text-slate-500 text-sm">{user?.email}</p>
               <div className="flex items-center gap-2 mt-2">
                 <span className="badge-gold">{user?.role || 'premium'} plan</span>
                 <span className="badge-brand">🏆 Wealth Builder</span>
@@ -200,12 +200,12 @@ export default function Profile() {
           { icon: <Award className="w-4 h-4" />, label: 'Member Since', value: 'January 2025' },
         ].map(d => (
           <div key={d.label} className="card-static p-4 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 flex-shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500 flex-shrink-0">
               {d.icon}
             </div>
             <div>
               <div className="text-2xs text-slate-500">{d.label}</div>
-              <div className="text-sm font-semibold text-white mt-0.5">{d.value}</div>
+              <div className="text-sm font-semibold text-slate-900 mt-0.5">{d.value}</div>
             </div>
           </div>
         ))}
@@ -214,25 +214,25 @@ export default function Profile() {
       {/* Security Settings */}
       <div className="card-static p-5">
         <div className="flex items-center gap-2 mb-4">
-          <Lock className="w-5 h-5 text-brand-400" />
-          <h3 className="text-sm font-bold text-white font-display">Security Settings</h3>
+          <Lock className="w-5 h-5 text-indigo-600" />
+          <h3 className="text-sm font-bold text-slate-900 font-display">Security Settings</h3>
         </div>
         
-        <div className="flex items-center justify-between p-4 bg-dark-800 rounded-xl border border-white/5">
+        <div className="flex items-center justify-between p-4 bg-dark-800 rounded-xl border border-slate-100">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${user?.mfaEnabled ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-400'}`}>
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${user?.mfaEnabled ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-50 text-slate-500'}`}>
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white">4-Digit mPIN Login</h4>
-              <p className="text-xs text-slate-400 mt-0.5">Extra layer of security for your account</p>
+              <h4 className="text-sm font-semibold text-slate-900">4-Digit mPIN Login</h4>
+              <p className="text-xs text-slate-500 mt-0.5">Extra layer of security for your account</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             {user?.mfaEnabled ? (
               <>
                 <button onClick={() => setMpinModal('reset')} className="btn-secondary text-xs py-1.5 px-3 gap-1"><Key className="w-3.5 h-3.5"/> Reset PIN</button>
-                <button onClick={() => setMpinModal('disable')} className="bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">Disable</button>
+                <button onClick={() => setMpinModal('disable')} className="bg-red-50 text-red-500 hover:bg-red-100 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">Disable</button>
               </>
             ) : (
               <button onClick={() => setMpinModal('setup')} className="btn-primary text-xs py-1.5 px-4">Enable mPIN</button>
@@ -243,12 +243,12 @@ export default function Profile() {
 
       {/* Recent Activity */}
       <div className="card-static p-5">
-        <h3 className="text-sm font-bold text-white mb-4 font-display">Recent Activity</h3>
+        <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Recent Activity</h3>
         <div className="space-y-3">
           {recentActivity.map((a, i) => (
             <div key={i} className="flex items-center gap-3">
               <span className="text-lg">{a.icon}</span>
-              <span className="text-xs text-slate-300 flex-1">{a.text}</span>
+              <span className="text-xs text-slate-600 flex-1">{a.text}</span>
               <span className="text-2xs text-slate-500 flex-shrink-0">{a.time}</span>
             </div>
           ))}
@@ -257,19 +257,19 @@ export default function Profile() {
 
       {/* Portfolios & Assets */}
       <div className="card-static p-5">
-        <h3 className="text-sm font-bold text-white mb-4 font-display">My Portfolios & Assets</h3>
+        <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">My Portfolios & Assets</h3>
         {portfolios.length === 0 ? (
-          <p className="text-sm text-slate-400">No portfolios found. Go to Holdings to create one.</p>
+          <p className="text-sm text-slate-500">No portfolios found. Go to Holdings to create one.</p>
         ) : (
           <div className="space-y-6">
             {portfolios.map(p => (
-              <div key={p.id} className="bg-dark-800 rounded-xl border border-white/5 p-4">
+              <div key={p.id} className="bg-dark-800 rounded-xl border border-slate-100 p-4">
                 <div className="flex justify-between items-center mb-4">
                   <div>
-                    <h4 className="text-lg font-bold text-white">{p.name}</h4>
-                    <p className="text-xs text-slate-400">{p.assetCount || 0} Assets • Total Value: ₹{(p.totalCurrentValue || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</p>
+                    <h4 className="text-lg font-bold text-slate-900">{p.name}</h4>
+                    <p className="text-xs text-slate-500">{p.assetCount || 0} Assets • Total Value: ₹{(p.totalCurrentValue || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</p>
                   </div>
-                  <span className="badge-brand text-xs px-2 py-1 bg-brand-500/10 text-brand-400 rounded-md">
+                  <span className="badge-brand text-xs px-2 py-1 bg-indigo-50 text-indigo-600 rounded-md">
                     {p.currency}
                   </span>
                 </div>
@@ -277,14 +277,14 @@ export default function Profile() {
                 {p.assets && p.assets.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-4">
                     {p.assets.map(asset => (
-                      <div key={asset.id} className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5">
+                      <div key={asset.id} className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
                         <div className="flex flex-col">
-                          <span className="text-sm font-bold text-white">{asset.symbol}</span>
+                          <span className="text-sm font-bold text-slate-900">{asset.symbol}</span>
                           <span className="text-xs text-slate-500 capitalize">{asset.type?.replace('_', ' ')}</span>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm font-semibold text-white">Qty: {asset.quantity}</div>
-                          <div className="text-xs text-emerald-400 font-semibold font-numeric">
+                          <div className="text-sm font-semibold text-slate-900">Qty: {asset.quantity}</div>
+                          <div className="text-xs text-emerald-600 font-semibold font-numeric">
                             ₹{(asset.currentValue || 0).toLocaleString('en-IN')}
                           </div>
                         </div>
@@ -305,34 +305,34 @@ export default function Profile() {
         {isEditing && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
               onClick={() => setIsEditing(false)}
             />
             <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-md bg-dark-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+              className="relative w-full max-w-md bg-dark-900 border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
               
-              <div className="flex items-center justify-between p-5 border-b border-white/5">
-                <h3 className="text-lg font-bold text-white font-display">Edit Profile</h3>
-                <button onClick={() => setIsEditing(false)} className="text-slate-400 hover:text-white transition-colors">
+              <div className="flex items-center justify-between p-5 border-b border-slate-100">
+                <h3 className="text-lg font-bold text-slate-900 font-display">Edit Profile</h3>
+                <button onClick={() => setIsEditing(false)} className="text-slate-500 hover:text-slate-900 transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <form onSubmit={handleSave} className="p-5 space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">Full Name</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Full Name</label>
                   <input type="text" name="name" value={formData.name} onChange={handleChange}
-                    className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500" required />
+                    className="w-full bg-dark-800 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-brand-500" required />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">Phone Number</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Phone Number</label>
                   <input type="text" name="phone" value={formData.phone} onChange={handleChange}
-                    className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500" />
+                    className="w-full bg-dark-800 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-brand-500" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">Risk Profile</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Risk Profile</label>
                   <select name="riskProfile" value={formData.riskProfile} onChange={handleChange}
-                    className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500">
+                    className="w-full bg-dark-800 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-brand-500">
                     <option value="conservative">Conservative</option>
                     <option value="moderate">Moderate</option>
                     <option value="moderately_aggressive">Moderately Aggressive</option>
@@ -341,9 +341,9 @@ export default function Profile() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">Investment Horizon</label>
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5">Investment Horizon</label>
                   <select name="investmentHorizon" value={formData.investmentHorizon} onChange={handleChange}
-                    className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500">
+                    className="w-full bg-dark-800 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-brand-500">
                     <option value="short_term">Short-term (1-3 years)</option>
                     <option value="medium_term">Medium-term (3-7 years)</option>
                     <option value="long_term">Long-term (7+ years)</option>
@@ -369,17 +369,17 @@ export default function Profile() {
         {mpinModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
               onClick={() => { setMpinModal(null); setMpinForm({pin:'', newPin:'', password:''}); }}
             />
             <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-md bg-dark-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+              className="relative w-full max-w-md bg-dark-900 border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
               
-              <div className="flex items-center justify-between p-5 border-b border-white/5">
-                <h3 className="text-lg font-bold text-white font-display">
+              <div className="flex items-center justify-between p-5 border-b border-slate-100">
+                <h3 className="text-lg font-bold text-slate-900 font-display">
                   {mpinModal === 'setup' ? 'Setup 4-Digit mPIN' : mpinModal === 'reset' ? 'Reset mPIN' : 'Disable mPIN'}
                 </h3>
-                <button onClick={() => { setMpinModal(null); setMpinForm({pin:'', newPin:'', password:''}); }} className="text-slate-400 hover:text-white transition-colors">
+                <button onClick={() => { setMpinModal(null); setMpinForm({pin:'', newPin:'', password:''}); }} className="text-slate-500 hover:text-slate-900 transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -387,37 +387,37 @@ export default function Profile() {
               <form onSubmit={handleMpinSubmit} className="p-5 space-y-4">
                 {(mpinModal === 'reset' || mpinModal === 'disable') && (
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Confirm Current Password</label>
+                    <label className="block text-xs font-medium text-slate-500 mb-1.5">Confirm Current Password</label>
                     <input type="password" name="password" maxLength={50} value={mpinForm.password} onChange={handleMpinChange}
-                      className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500" required />
+                      className="w-full bg-dark-800 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-brand-500" required />
                   </div>
                 )}
 
                 {mpinModal === 'setup' && (
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Enter 4-Digit PIN</label>
+                    <label className="block text-xs font-medium text-slate-500 mb-1.5">Enter 4-Digit PIN</label>
                     <input type="password" name="pin" maxLength={4} minLength={4} pattern="\d{4}" value={mpinForm.pin} onChange={handleMpinChange}
-                      className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-2xl tracking-widest text-center text-white focus:outline-none focus:border-brand-500" required />
+                      className="w-full bg-dark-800 border border-slate-200 rounded-xl px-4 py-2.5 text-2xl tracking-widest text-center text-slate-900 focus:outline-none focus:border-brand-500" required />
                   </div>
                 )}
 
                 {mpinModal === 'reset' && (
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Enter New 4-Digit PIN</label>
+                    <label className="block text-xs font-medium text-slate-500 mb-1.5">Enter New 4-Digit PIN</label>
                     <input type="password" name="newPin" maxLength={4} minLength={4} pattern="\d{4}" value={mpinForm.newPin} onChange={handleMpinChange}
-                      className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-2xl tracking-widest text-center text-white focus:outline-none focus:border-brand-500" required />
+                      className="w-full bg-dark-800 border border-slate-200 rounded-xl px-4 py-2.5 text-2xl tracking-widest text-center text-slate-900 focus:outline-none focus:border-brand-500" required />
                   </div>
                 )}
 
                 {mpinModal === 'disable' && (
-                  <p className="text-sm text-rose-400">Are you sure you want to disable mPIN login? This will reduce the security of your account.</p>
+                  <p className="text-sm text-red-500">Are you sure you want to disable mPIN login? This will reduce the security of your account.</p>
                 )}
 
                 <div className="pt-4 flex gap-3">
                   <button type="button" onClick={() => { setMpinModal(null); setMpinForm({pin:'', newPin:'', password:''}); }}
                     className="flex-1 btn-secondary py-2.5">Cancel</button>
                   <button type="submit" disabled={isSaving}
-                    className={`flex-1 py-2.5 rounded-xl font-semibold transition-all ${mpinModal === 'disable' ? 'bg-rose-500 hover:bg-rose-600 text-white shadow-lg shadow-rose-500/20' : 'btn-primary'}`}>
+                    className={`flex-1 py-2.5 rounded-xl font-semibold transition-all ${mpinModal === 'disable' ? 'bg-rose-500 hover:bg-rose-600 text-slate-900 shadow-lg shadow-rose-500/20' : 'btn-primary'}`}>
                     {isSaving ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : 'Confirm'}
                   </button>
                 </div>

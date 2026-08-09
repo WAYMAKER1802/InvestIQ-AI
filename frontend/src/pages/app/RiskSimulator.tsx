@@ -45,8 +45,8 @@ export default function RiskSimulator() {
   if (portfolioLoading || !activePortfolio) {
     return (
       <div className="flex h-64 items-center justify-center space-x-2">
-        <Loader2 className="h-6 w-6 animate-spin text-brand-400" />
-        <span className="text-slate-400">Loading risk metrics...</span>
+        <Loader2 className="h-6 w-6 animate-spin text-indigo-600" />
+        <span className="text-slate-500">Loading risk metrics...</span>
       </div>
     );
   }
@@ -56,10 +56,10 @@ export default function RiskSimulator() {
   
   // Dynamic Risk Metrics
   const riskMetrics = [
-    { label: 'Overall Risk Score', value: `${(p.riskScore || 5).toFixed(1)} / 10`, color: 'text-amber-400', bar: (p.riskScore || 5) * 10 },
-    { label: 'Asset Count',        value: `${p.assets?.length || 0}`,              color: 'text-white',     bar: Math.min(100, (p.assets?.length || 0) * 10) },
-    { label: 'Diversification',    value: `${(p.diversificationScore || 50).toFixed(1)}%`, color: 'text-amber-400', bar: p.diversificationScore || 50 },
-    { label: 'Health Score',       value: `${(p.healthScore || 50).toFixed(0)} / 100`, color: 'text-emerald-400', bar: p.healthScore || 50 },
+    { label: 'Overall Risk Score', value: `${(p.riskScore || 5).toFixed(1)} / 10`, color: 'text-amber-600', bar: (p.riskScore || 5) * 10 },
+    { label: 'Asset Count',        value: `${p.assets?.length || 0}`,              color: 'text-slate-900',     bar: Math.min(100, (p.assets?.length || 0) * 10) },
+    { label: 'Diversification',    value: `${(p.diversificationScore || 50).toFixed(1)}%`, color: 'text-amber-600', bar: p.diversificationScore || 50 },
+    { label: 'Health Score',       value: `${(p.healthScore || 50).toFixed(0)} / 100`, color: 'text-emerald-600', bar: p.healthScore || 50 },
   ];
 
   // Dynamic Sector Risk
@@ -76,8 +76,8 @@ export default function RiskSimulator() {
     <div className="space-y-6 max-w-screen-xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black font-display text-white">AI What-If Simulator</h1>
-          <p className="text-slate-400 text-sm mt-0.5">Stress-test your live portfolio against historical crashes</p>
+          <h1 className="text-2xl font-black font-display text-slate-900">AI What-If Simulator</h1>
+          <p className="text-slate-500 text-sm mt-0.5">Stress-test your live portfolio against historical crashes</p>
         </div>
         <div className={`text-sm px-3 py-1.5 rounded-full ${p.riskScore > 7 ? 'badge-loss' : p.riskScore > 4 ? 'badge-warn' : 'badge-profit'}`}>
           Risk Score: {(p.riskScore || 5).toFixed(1)} / 10
@@ -90,10 +90,10 @@ export default function RiskSimulator() {
           <button key={s.name} onClick={() => setSelectedScenario(s)} disabled={loading}
             className={`p-3 rounded-xl border text-left transition-all ${
               selectedScenario.name === s.name
-                ? 'border-brand-500/50 bg-brand-500/10 scale-[1.02]'
-                : 'border-white/10 bg-white/5 hover:border-white/20'
+                ? 'border-brand-500/50 bg-indigo-50 scale-[1.02]'
+                : 'border-slate-200 bg-slate-50 hover:border-slate-300'
             } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
-            <div className="text-xs font-semibold text-white mb-1">{s.name}</div>
+            <div className="text-xs font-semibold text-slate-900 mb-1">{s.name}</div>
             <div className="text-2xs text-slate-500">Select Scenario</div>
           </button>
         ))}
@@ -102,32 +102,32 @@ export default function RiskSimulator() {
       {/* Impact Display */}
       {loading ? (
         <div className="h-[250px] flex items-center justify-center p-6 rounded-2xl border-glow-red bg-rose-500/5">
-          <Loader2 className="w-8 h-8 animate-spin text-rose-400" />
+          <Loader2 className="w-8 h-8 animate-spin text-red-500" />
         </div>
       ) : simulation ? (
         <motion.div key={simulation.scenarioName} initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
           className="p-6 rounded-2xl border-glow-red bg-rose-500/5">
           <div className="flex items-center gap-3 mb-5">
-            <AlertTriangle className="w-6 h-6 text-rose-400" />
+            <AlertTriangle className="w-6 h-6 text-red-500" />
             <div>
-              <h2 className="text-lg font-bold text-white font-display">{simulation.scenarioName} Scenario</h2>
-              <p className="text-sm text-slate-400">If this crash happened to your portfolio today:</p>
+              <h2 className="text-lg font-bold text-slate-900 font-display">{simulation.scenarioName} Scenario</h2>
+              <p className="text-sm text-slate-500">If this crash happened to your portfolio today:</p>
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: 'Market Drop',    value: `${simulation.marketDrop}%`,     color: 'text-rose-400' },
-              { label: 'Portfolio Drop', value: `${simulation.portfolioDrop}%`, color: 'text-rose-400' },
-              { label: 'Value at Risk',  value: `₹${Math.abs(impactAmount / 100000).toFixed(1)}L`, color: 'text-rose-400' },
-              { label: 'Recovery Time',  value: simulation.recoveryTime,        color: 'text-amber-400' },
+              { label: 'Market Drop',    value: `${simulation.marketDrop}%`,     color: 'text-red-500' },
+              { label: 'Portfolio Drop', value: `${simulation.portfolioDrop}%`, color: 'text-red-500' },
+              { label: 'Value at Risk',  value: `₹${Math.abs(impactAmount / 100000).toFixed(1)}L`, color: 'text-red-500' },
+              { label: 'Recovery Time',  value: simulation.recoveryTime,        color: 'text-amber-600' },
             ].map(s => (
-              <div key={s.label} className="text-center p-4 rounded-xl bg-white/5 shadow-inner">
+              <div key={s.label} className="text-center p-4 rounded-xl bg-slate-50 shadow-inner">
                 <div className={`text-2xl font-black font-display ${s.color}`}>{s.value}</div>
                 <div className="text-xs text-slate-500 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
-          <div className="mt-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-sm text-amber-300 flex items-start gap-3">
+          <div className="mt-4 p-4 rounded-xl bg-amber-50 border border-amber-500/20 text-sm text-amber-300 flex items-start gap-3">
              <Zap className="w-5 h-5 flex-shrink-0 mt-0.5" />
              <p><strong>AI Insight:</strong> {simulation.insight}</p>
           </div>
@@ -138,12 +138,12 @@ export default function RiskSimulator() {
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Risk Metrics */}
         <div className="card-static p-5">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">Risk Metrics Dashboard</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Risk Metrics Dashboard</h3>
           <div className="space-y-4">
             {riskMetrics.map(m => (
               <div key={m.label}>
                 <div className="flex justify-between text-xs mb-1.5">
-                  <span className="text-slate-400">{m.label}</span>
+                  <span className="text-slate-500">{m.label}</span>
                   <span className={`font-semibold font-numeric ${m.color}`}>{m.value}</span>
                 </div>
                 <div className="progress-bar">
@@ -157,7 +157,7 @@ export default function RiskSimulator() {
 
         {/* Risk by Sector */}
         <div className="card-static p-5">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">Risk by Sector</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Risk by Sector</h3>
           {riskBreakdown.length > 0 ? (
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={riskBreakdown} layout="vertical">
@@ -184,8 +184,8 @@ export default function RiskSimulator() {
       {/* Individual Asset Impact Table */}
       {simulation?.assetImpacts?.length > 0 && (
         <div className="card-static">
-          <div className="p-5 border-b border-white/5">
-            <h3 className="text-sm font-bold text-white font-display">Simulated Impact by Asset</h3>
+          <div className="p-5 border-b border-slate-100">
+            <h3 className="text-sm font-bold text-slate-900 font-display">Simulated Impact by Asset</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="data-table">
@@ -201,10 +201,10 @@ export default function RiskSimulator() {
               <tbody>
                 {simulation.assetImpacts.sort((a: any, b: any) => a.simulatedDropPct - b.simulatedDropPct).map((asset: any) => (
                   <tr key={asset.symbol}>
-                    <td className="font-semibold text-white">{asset.symbol}</td>
-                    <td className="text-slate-400 text-xs capitalize">{asset.sector.replace('_', ' ')}</td>
+                    <td className="font-semibold text-slate-900">{asset.symbol}</td>
+                    <td className="text-slate-500 text-xs capitalize">{asset.sector.replace('_', ' ')}</td>
                     <td className="text-right font-numeric text-sm">₹{asset.currentValue.toLocaleString('en-IN')}</td>
-                    <td className="text-right font-numeric text-sm font-bold text-rose-400">{asset.simulatedDropPct.toFixed(2)}%</td>
+                    <td className="text-right font-numeric text-sm font-bold text-red-500">{asset.simulatedDropPct.toFixed(2)}%</td>
                     <td className="text-right font-numeric text-sm">₹{asset.simulatedValue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</td>
                   </tr>
                 ))}

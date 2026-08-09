@@ -23,9 +23,9 @@ const suggestedQuestions = [
 
 const formatMessage = (text: string) => {
   return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-900">$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/`(.*?)`/g, '<code class="bg-white/10 px-1 rounded font-numeric text-brand-300 text-xs">$1</code>')
+    .replace(/`(.*?)`/g, '<code class="bg-slate-100 px-1 rounded font-numeric text-brand-300 text-xs">$1</code>')
     .replace(/\n/g, '<br/>');
 };
 
@@ -120,11 +120,11 @@ export default function AIChat() {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center shadow-glow">
-            <Brain className="w-5 h-5 text-white" />
+            <Brain className="w-5 h-5 text-slate-900" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-white font-display">AI Financial Coach</h1>
-            <div className="flex items-center gap-1.5 text-xs text-emerald-400">
+            <h1 className="text-lg font-bold text-slate-900 font-display">AI Financial Coach</h1>
+            <div className="flex items-center gap-1.5 text-xs text-emerald-600">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Online · Powered by GPT-4
             </div>
@@ -153,8 +153,8 @@ export default function AIChat() {
                   : 'bg-gradient-to-br from-brand-600/30 to-accent-violet/30 border border-brand-500/30'
               }`}>
                 {msg.role === 'user'
-                  ? <User className="w-4 h-4 text-white" />
-                  : <Bot className="w-4 h-4 text-brand-400" />}
+                  ? <User className="w-4 h-4 text-slate-900" />
+                  : <Bot className="w-4 h-4 text-indigo-600" />}
               </div>
 
               {/* Bubble */}
@@ -167,15 +167,15 @@ export default function AIChat() {
                 </div>
                 {/* Actions */}
                 <div className={`flex gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity ${msg.role === 'user' ? 'justify-end' : ''}`}>
-                  <button onClick={() => copyMessage(msg.content)} className="p-1 rounded hover:bg-white/10 text-slate-600 hover:text-slate-400 transition-colors">
+                  <button onClick={() => copyMessage(msg.content)} className="p-1 rounded hover:bg-slate-100 text-slate-600 hover:text-slate-500 transition-colors">
                     <Copy className="w-3 h-3" />
                   </button>
                   {msg.role === 'assistant' && (
                     <>
-                      <button className="p-1 rounded hover:bg-white/10 text-slate-600 hover:text-emerald-400 transition-colors">
+                      <button className="p-1 rounded hover:bg-slate-100 text-slate-600 hover:text-emerald-600 transition-colors">
                         <ThumbsUp className="w-3 h-3" />
                       </button>
-                      <button className="p-1 rounded hover:bg-white/10 text-slate-600 hover:text-rose-400 transition-colors">
+                      <button className="p-1 rounded hover:bg-slate-100 text-slate-600 hover:text-red-500 transition-colors">
                         <ThumbsDown className="w-3 h-3" />
                       </button>
                     </>
@@ -193,7 +193,7 @@ export default function AIChat() {
         {loading && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-3">
             <div className="w-8 h-8 rounded-full bg-brand-600/30 border border-brand-500/30 flex items-center justify-center">
-              <Bot className="w-4 h-4 text-brand-400" />
+              <Bot className="w-4 h-4 text-indigo-600" />
             </div>
             <div className="chat-bubble-ai">
               <div className="typing-indicator">
@@ -215,7 +215,7 @@ export default function AIChat() {
           <div className="flex flex-wrap gap-2">
             {suggestedQuestions.map(q => (
               <button key={q} onClick={() => sendMessage(q)}
-                className="text-xs px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-300 hover:border-brand-500/30 hover:bg-brand-500/10 hover:text-brand-300 transition-all">
+                className="text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:border-brand-500/30 hover:bg-indigo-50 hover:text-brand-300 transition-all">
                 {q}
               </button>
             ))}
@@ -235,10 +235,10 @@ export default function AIChat() {
           onKeyDown={handleKeyDown}
           placeholder="Ask anything about your portfolio, market, or investment strategy..."
           rows={1}
-          className="flex-1 bg-transparent text-sm text-slate-200 placeholder-slate-600 resize-none outline-none leading-relaxed max-h-32 overflow-y-auto no-scrollbar"
+          className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 resize-none outline-none leading-relaxed max-h-32 overflow-y-auto no-scrollbar"
           style={{ minHeight: '24px' }}
         />
-        <button className="btn-icon p-2 text-slate-500 hover:text-brand-400">
+        <button className="btn-icon p-2 text-slate-500 hover:text-indigo-600">
           <Mic className="w-4 h-4" />
         </button>
         <button

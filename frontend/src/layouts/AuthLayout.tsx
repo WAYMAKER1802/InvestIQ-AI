@@ -16,8 +16,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       {/* Left Panel — Brand (Angel One-inspired) */}
       <div className="hidden lg:flex flex-col justify-between p-12 bg-indigo-600 relative overflow-hidden">
         {/* Decorative blobs */}
-        <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/5 -translate-y-1/3 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 translate-y-1/3 -translate-x-1/3" />
+        <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-slate-50 -translate-y-1/3 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-slate-50 translate-y-1/3 -translate-x-1/3" />
         <div className="absolute inset-0 opacity-5"
           style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
 
@@ -25,17 +25,17 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           {/* Logo */}
           <div className="flex items-center gap-3 mb-16">
             <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-              <TrendingUp className="w-5 h-5 text-white" />
+              <TrendingUp className="w-5 h-5 text-slate-900" />
             </div>
             <div>
-              <div className="text-lg font-black text-white" style={{ fontFamily: 'Outfit, sans-serif' }}>InvestIQ AI</div>
+              <div className="text-lg font-black text-slate-900" style={{ fontFamily: 'Outfit, sans-serif' }}>InvestIQ AI</div>
               <div className="text-xs text-indigo-200">AI-Driven Portfolio Advisor</div>
             </div>
           </div>
 
           {/* Hero text */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-            <h1 className="text-4xl font-black text-white leading-tight mb-4" style={{ fontFamily: 'Outfit, sans-serif' }}>
+            <h1 className="text-4xl font-black text-slate-900 leading-tight mb-4" style={{ fontFamily: 'Outfit, sans-serif' }}>
               Your AI-Powered<br />
               <span className="text-indigo-200">Financial Coach</span><br />
               is waiting.
@@ -53,7 +53,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 + i * 0.1 }}
               className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center">
-                <f.icon className="w-4 h-4 text-white" />
+                <f.icon className="w-4 h-4 text-slate-900" />
               </div>
               <span className="text-sm text-indigo-100">{f.text}</span>
             </motion.div>
@@ -72,7 +72,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-8 lg:hidden">
             <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
-              <TrendingUp className="w-4 h-4 text-white" />
+              <TrendingUp className="w-4 h-4 text-slate-900" />
             </div>
             <span className="font-black text-indigo-600" style={{ fontFamily: 'Outfit, sans-serif' }}>InvestIQ AI</span>
           </div>

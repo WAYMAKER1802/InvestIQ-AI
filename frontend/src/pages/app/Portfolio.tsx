@@ -21,10 +21,10 @@ const recColors: Record<string, string> = {
   'STRONG BUY': 'chip-strong-buy', 'STRONG SELL': 'chip-strong-sell',
 };
 const typeColors: Record<string, string> = {
-  stock: 'bg-brand-500/15 text-brand-400', etf: 'bg-cyan-500/15 text-cyan-400',
-  ppf: 'bg-emerald-500/15 text-emerald-400', crypto: 'bg-amber-500/15 text-amber-400',
-  mutual_fund: 'bg-violet-500/15 text-violet-400', gold: 'bg-yellow-500/15 text-yellow-400',
-  fd: 'bg-blue-500/15 text-blue-400', bond: 'bg-slate-500/15 text-slate-400',
+  stock: 'bg-indigo-600/15 text-indigo-600', etf: 'bg-cyan-500/15 text-cyan-400',
+  ppf: 'bg-emerald-500/15 text-emerald-600', crypto: 'bg-amber-500/15 text-amber-600',
+  mutual_fund: 'bg-violet-500/15 text-violet-600', gold: 'bg-yellow-500/15 text-yellow-400',
+  fd: 'bg-blue-500/15 text-blue-600', bond: 'bg-slate-500/15 text-slate-500',
 };
 
 const fmt   = (n: number) => (n || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 });
@@ -65,26 +65,26 @@ function AddAssetModal({ portfolioId, onClose, onAdd }: { portfolioId: number; o
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
       <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
         className="card-static p-6 w-full max-w-md relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
-        <h2 className="text-lg font-bold text-white font-display mb-5">Add Asset</h2>
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-slate-900"><X className="w-5 h-5" /></button>
+        <h2 className="text-lg font-bold text-slate-900 font-display mb-5">Add Asset</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs text-slate-400 mb-1 block">Symbol *</label>
+              <label className="text-xs text-slate-500 mb-1 block">Symbol *</label>
               <input value={form.symbol} onChange={e => setForm(s => ({ ...s, symbol: e.target.value.toUpperCase() }))}
                 placeholder="RELIANCE" className="input w-full uppercase" required />
             </div>
             <div>
-              <label className="text-xs text-slate-400 mb-1 block">Name</label>
+              <label className="text-xs text-slate-500 mb-1 block">Name</label>
               <input value={form.name} onChange={e => setForm(s => ({ ...s, name: e.target.value }))}
                 placeholder="Reliance Industries" className="input w-full" />
             </div>
           </div>
           <div>
-            <label className="text-xs text-slate-400 mb-1 block">Asset Type *</label>
+            <label className="text-xs text-slate-500 mb-1 block">Asset Type *</label>
             <select value={form.type} onChange={e => setForm(s => ({ ...s, type: e.target.value }))} className="input w-full">
               {['stock','mutual_fund','etf','crypto','gold','bond','fd','ppf','real_estate','other'].map(t => (
                 <option key={t} value={t}>{t.replace('_',' ').toUpperCase()}</option>
@@ -93,20 +93,20 @@ function AddAssetModal({ portfolioId, onClose, onAdd }: { portfolioId: number; o
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs text-slate-400 mb-1 block">Quantity *</label>
+              <label className="text-xs text-slate-500 mb-1 block">Quantity *</label>
               <input type="number" step="any" min="0" value={form.quantity}
                 onChange={e => setForm(s => ({ ...s, quantity: e.target.value }))}
                 placeholder="10" className="input w-full" required />
             </div>
             <div>
-              <label className="text-xs text-slate-400 mb-1 block">Avg Buy Price (₹) *</label>
+              <label className="text-xs text-slate-500 mb-1 block">Avg Buy Price (₹) *</label>
               <input type="number" step="any" min="0" value={form.avgBuyPrice}
                 onChange={e => setForm(s => ({ ...s, avgBuyPrice: e.target.value }))}
                 placeholder="2400" className="input w-full" required />
             </div>
           </div>
           <div>
-            <label className="text-xs text-slate-400 mb-1 block">Sector</label>
+            <label className="text-xs text-slate-500 mb-1 block">Sector</label>
             <select value={form.sector} onChange={e => setForm(s => ({ ...s, sector: e.target.value }))} className="input w-full">
               {['Unknown','IT','Banking','Energy','Pharma','FMCG','Auto','Infrastructure','Real Estate','Gold','Crypto','Fixed Income','Others'].map(s => (
                 <option key={s} value={s}>{s}</option>
@@ -114,8 +114,8 @@ function AddAssetModal({ portfolioId, onClose, onAdd }: { portfolioId: number; o
             </select>
           </div>
           {form.quantity && form.avgBuyPrice && (
-            <div className="p-3 rounded-xl bg-white/5 text-xs text-slate-400">
-              Invested: <span className="text-white font-semibold">₹{fmt(parseFloat(form.quantity||'0') * parseFloat(form.avgBuyPrice||'0'))}</span>
+            <div className="p-3 rounded-xl bg-slate-50 text-xs text-slate-500">
+              Invested: <span className="text-slate-900 font-semibold">₹{fmt(parseFloat(form.quantity||'0') * parseFloat(form.avgBuyPrice||'0'))}</span>
             </div>
           )}
           <div className="flex gap-3 pt-2">
@@ -153,33 +153,33 @@ function ConnectBrokerModal({ onClose }: { onClose: () => void }) {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
       <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
         className="card-static p-6 w-full max-w-md relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
-        <h2 className="text-xl font-bold text-white font-display mb-2">Connect Broker</h2>
-        <p className="text-sm text-slate-400 mb-6">Import your entire portfolio in one click.</p>
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-slate-900"><X className="w-5 h-5" /></button>
+        <h2 className="text-xl font-bold text-slate-900 font-display mb-2">Connect Broker</h2>
+        <p className="text-sm text-slate-500 mb-6">Import your entire portfolio in one click.</p>
         
         <div className="space-y-3 mb-6">
           {brokers.map((broker) => (
             <button key={broker.name} onClick={() => handleConnect(broker.name)} disabled={connecting !== null}
-              className="w-full flex items-center justify-between p-4 rounded-xl border border-white/10 hover:border-white/20 transition-all bg-white/5 disabled:opacity-50">
+              className="w-full flex items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-slate-300 transition-all bg-slate-50 disabled:opacity-50">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: broker.color }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-slate-900 font-bold" style={{ backgroundColor: broker.color }}>
                   {broker.name[0]}
                 </div>
                 <div className="text-left">
-                  <div className="text-sm font-bold text-white">{broker.name}</div>
+                  <div className="text-sm font-bold text-slate-900">{broker.name}</div>
                   <div className="text-xs text-slate-500">Auto-sync holdings & trades</div>
                 </div>
               </div>
-              {connecting === broker.name ? <Loader2 className="w-5 h-5 text-slate-400 animate-spin" /> : <TrendingUp className="w-5 h-5 text-slate-400" />}
+              {connecting === broker.name ? <Loader2 className="w-5 h-5 text-slate-500 animate-spin" /> : <TrendingUp className="w-5 h-5 text-slate-500" />}
             </button>
           ))}
         </div>
 
         <div className="text-center text-xs text-slate-500">
-          Or <label className="text-brand-400 hover:underline cursor-pointer">upload a CSV file manually
+          Or <label className="text-indigo-600 hover:underline cursor-pointer">upload a CSV file manually
             <input type="file" className="hidden" />
           </label>
         </div>
@@ -209,13 +209,13 @@ function CreatePortfolioModal({ onClose, onCreate }: { onClose: () => void; onCr
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
       <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="card-static p-6 w-full max-w-sm relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white"><X className="w-5 h-5" /></button>
-        <h2 className="text-lg font-bold text-white font-display mb-5">Create Portfolio</h2>
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-slate-900"><X className="w-5 h-5" /></button>
+        <h2 className="text-lg font-bold text-slate-900 font-display mb-5">Create Portfolio</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-xs text-slate-400 mb-1 block">Portfolio Name</label>
+            <label className="text-xs text-slate-500 mb-1 block">Portfolio Name</label>
             <input value={name} onChange={e => setName(e.target.value)} className="input w-full" required />
           </div>
           <div className="flex gap-3">
@@ -346,10 +346,10 @@ export default function Portfolio() {
       {/* ── Header ───────────────────────────────────────────────────────── */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-black font-display text-white flex items-center gap-2">
-            <PieChart className="w-6 h-6 text-brand-400" /> Holdings
+          <h1 className="text-2xl font-black font-display text-slate-900 flex items-center gap-2">
+            <PieChart className="w-6 h-6 text-indigo-600" /> Holdings
           </h1>
-          <p className="text-slate-400 text-sm mt-0.5">Track and analyze your investments.</p>
+          <p className="text-slate-500 text-sm mt-0.5">Track and analyze your investments.</p>
         </div>
         <div className="flex gap-2">
           <input type="file" ref={fileRef} accept=".csv,.xlsx,.xls" className="hidden" onChange={handleImport} />
@@ -378,7 +378,7 @@ export default function Portfolio() {
             <button key={port.id}
               onClick={() => setActivePortfolio(port.id)}
               className={`text-xs px-3 py-1.5 rounded-lg whitespace-nowrap transition-all ${
-                port.id === p?.id ? 'bg-brand-500/20 text-brand-400 border border-brand-500/30' : 'text-slate-500 hover:text-white border border-white/10'
+                port.id === p?.id ? 'bg-indigo-600/20 text-indigo-600 border border-brand-500/30' : 'text-slate-500 hover:text-slate-900 border border-slate-200'
               }`}>
               {port.name}
             </button>
@@ -390,8 +390,8 @@ export default function Portfolio() {
       {!loading && portfolios.length === 0 && (
         <div className="card-static p-12 text-center">
           <div className="text-5xl mb-4">📊</div>
-          <h3 className="text-xl font-bold text-white mb-2">Create Your First Portfolio</h3>
-          <p className="text-slate-400 text-sm mb-6">Start tracking your investments with real-time prices and AI insights.</p>
+          <h3 className="text-xl font-bold text-slate-900 mb-2">Create Your First Portfolio</h3>
+          <p className="text-slate-500 text-sm mb-6">Start tracking your investments with real-time prices and AI insights.</p>
           <button onClick={() => setShowCreate(true)} className="btn-primary gap-2">
             <Plus className="w-4 h-4" /> Create Portfolio
           </button>
@@ -412,8 +412,8 @@ export default function Portfolio() {
                 className="stat-card">
                 <p className="stat-label">{c.label}</p>
                 {loading
-                  ? <div className="h-8 bg-white/5 rounded-lg mt-1 animate-pulse" />
-                  : <p className={`text-2xl font-bold font-display mt-1 ${c.profit !== undefined ? (c.profit ? 'text-emerald-400' : 'text-rose-400') : 'text-white'}`}>
+                  ? <div className="h-8 bg-slate-50 rounded-lg mt-1 animate-pulse" />
+                  : <p className={`text-2xl font-bold font-display mt-1 ${c.profit !== undefined ? (c.profit ? 'text-emerald-600' : 'text-red-500') : 'text-slate-900'}`}>
                       {c.value}
                     </p>
                 }
@@ -433,7 +433,7 @@ export default function Portfolio() {
             ].map((m, i) => (
               <div key={i} className="stat-card py-3 px-4">
                 <p className="stat-label text-2xs">{m.label}</p>
-                <p className="text-lg font-bold text-white font-numeric mt-0.5">{m.value}</p>
+                <p className="text-lg font-bold text-slate-900 font-numeric mt-0.5">{m.value}</p>
               </div>
             ))}
           </div>
@@ -442,7 +442,7 @@ export default function Portfolio() {
           <div className="grid lg:grid-cols-4 gap-6">
             {/* Allocation Chart */}
             <div className="card-static p-5">
-              <h3 className="text-sm font-bold text-white mb-4 font-display">Allocation</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Allocation</h3>
               {(p.assets || []).length > 0 ? (
                 <>
                   <ResponsiveContainer width="100%" height={160}>
@@ -459,8 +459,8 @@ export default function Portfolio() {
                     {p.assets.slice(0,7).map((a, i) => (
                       <div key={a.id} className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: COLORS[i % COLORS.length] }} />
-                        <span className="text-2xs text-slate-400 flex-1">{a.symbol}</span>
-                        <span className="text-2xs font-numeric font-semibold text-white">{(a.allocationPct||0).toFixed(1)}%</span>
+                        <span className="text-2xs text-slate-500 flex-1">{a.symbol}</span>
+                        <span className="text-2xs font-numeric font-semibold text-slate-900">{(a.allocationPct||0).toFixed(1)}%</span>
                       </div>
                     ))}
                   </div>
@@ -473,7 +473,7 @@ export default function Portfolio() {
             {/* Holdings Table */}
             <div className="lg:col-span-3 card-static">
               {/* Controls */}
-              <div className="flex flex-wrap items-center gap-3 p-4 border-b border-white/5">
+              <div className="flex flex-wrap items-center gap-3 p-4 border-b border-slate-100">
                 <div className="relative flex-1 min-w-40">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" />
                   <input value={search} onChange={e => setSearch(e.target.value)}
@@ -516,12 +516,12 @@ export default function Portfolio() {
                       <motion.tr key={a.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                         <td>
                           <div className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-xs font-bold text-brand-400">
+                            <div className="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-xs font-bold text-indigo-600">
                               {a.symbol.slice(0,2)}
                             </div>
                             <div>
-                              <div className="font-semibold text-white text-sm">{a.symbol}</div>
-                              <span className={`text-2xs px-1.5 py-0.5 rounded-full ${typeColors[a.type] || 'bg-white/10 text-slate-400'}`}>
+                              <div className="font-semibold text-slate-900 text-sm">{a.symbol}</div>
+                              <span className={`text-2xs px-1.5 py-0.5 rounded-full ${typeColors[a.type] || 'bg-slate-100 text-slate-500'}`}>
                                 {a.type.replace('_',' ')}
                               </span>
                             </div>
@@ -529,10 +529,10 @@ export default function Portfolio() {
                         </td>
                         <td className="text-right font-numeric text-sm">{a.quantity}</td>
                         <td className="text-right">
-                          <div className="text-xs text-slate-400">₹{fmt(a.avgBuyPrice)}</div>
-                          <div className="text-xs font-semibold text-white">₹{fmt(a.currentPrice)}</div>
+                          <div className="text-xs text-slate-500">₹{fmt(a.avgBuyPrice)}</div>
+                          <div className="text-xs font-semibold text-slate-900">₹{fmt(a.currentPrice)}</div>
                           {(a.dayChangePct || 0) !== 0 && (
-                            <div className={`text-2xs ${(a.dayChangePct||0) >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                            <div className={`text-2xs ${(a.dayChangePct||0) >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                               {(a.dayChangePct||0) >= 0 ? '▲' : '▼'} {Math.abs(a.dayChangePct||0).toFixed(2)}%
                             </div>
                           )}
@@ -540,10 +540,10 @@ export default function Portfolio() {
                         <td className="text-right font-numeric text-sm">₹{fmt(a.investedAmount)}</td>
                         <td className="text-right font-numeric font-semibold text-sm">₹{fmt(a.currentValue)}</td>
                         <td className="text-right">
-                          <div className={`text-sm font-bold font-numeric ${(a.absoluteReturn||0) >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                          <div className={`text-sm font-bold font-numeric ${(a.absoluteReturn||0) >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                             {(a.absoluteReturn||0) >= 0 ? '+' : ''}₹{fmt(Math.abs(a.absoluteReturn||0))}
                           </div>
-                          <div className={`text-2xs ${(a.percentageReturn||0) >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                          <div className={`text-2xs ${(a.percentageReturn||0) >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                             {(a.percentageReturn||0) >= 0 ? '+' : ''}{(a.percentageReturn||0).toFixed(1)}%
                           </div>
                         </td>
@@ -565,7 +565,7 @@ export default function Portfolio() {
                         </td>
                         <td className="text-right">
                           <button onClick={() => handleDelete(a.id)} disabled={deletingId === a.id}
-                            className="text-slate-500 hover:text-rose-400 transition-colors ml-2">
+                            className="text-slate-500 hover:text-red-500 transition-colors ml-2">
                             {deletingId === a.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                           </button>
                         </td>
@@ -583,7 +583,7 @@ export default function Portfolio() {
               </div>
 
               {/* Footer */}
-              <div className="flex items-center justify-between px-4 py-3 border-t border-white/5">
+              <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100">
                 <span className="text-xs text-slate-500">{assets.length} asset{assets.length !== 1 ? 's' : ''}</span>
                 <Link to="/app/ai-chat" className="btn-primary text-xs gap-1.5 py-2">
                   <Brain className="w-3.5 h-3.5" /> AI Analysis

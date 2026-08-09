@@ -13,11 +13,11 @@ const tabs = [
 const Toggle = ({ label, desc, enabled, onChange }: { label: string; desc: string; enabled: boolean; onChange: () => void }) => (
   <div className="flex items-center justify-between py-3">
     <div>
-      <div className="text-sm font-medium text-white">{label}</div>
+      <div className="text-sm font-medium text-slate-900">{label}</div>
       <div className="text-xs text-slate-500 mt-0.5">{desc}</div>
     </div>
     <button onClick={onChange}
-      className={`w-11 h-6 rounded-full transition-all duration-200 relative flex-shrink-0 ${enabled ? 'bg-brand-500' : 'bg-white/10'}`}>
+      className={`w-11 h-6 rounded-full transition-all duration-200 relative flex-shrink-0 ${enabled ? 'bg-indigo-600' : 'bg-slate-100'}`}>
       <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-all duration-200 ${enabled ? 'left-5.5' : 'left-0.5'}`} />
     </button>
   </div>
@@ -41,8 +41,8 @@ export default function Settings() {
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
-        <h1 className="text-2xl font-black font-display text-white">Settings</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Manage your account preferences</p>
+        <h1 className="text-2xl font-black font-display text-slate-900">Settings</h1>
+        <p className="text-slate-500 text-sm mt-0.5">Manage your account preferences</p>
       </div>
 
       <div className="grid lg:grid-cols-4 gap-6">
@@ -63,7 +63,7 @@ export default function Settings() {
         <div className="lg:col-span-3 card-static p-6">
           {activeTab === 'profile' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
-              <h2 className="text-base font-bold text-white font-display">Profile Settings</h2>
+              <h2 className="text-base font-bold text-slate-900 font-display">Profile Settings</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {[{ label: 'Full Name', val: 'Arjun Sharma', type: 'text' },
                   { label: 'Email', val: 'arjun@demo.com', type: 'email' },
@@ -88,9 +88,9 @@ export default function Settings() {
                 <label className="label">Investment Goals</label>
                 <div className="flex flex-wrap gap-2 mt-1">
                   {['Wealth Creation', 'Retirement', 'Child Education', 'Home Purchase'].map(g => (
-                    <button key={g} className="badge-brand px-3 py-1.5 text-xs rounded-full cursor-pointer hover:bg-brand-500/25 transition-all">{g} ×</button>
+                    <button key={g} className="badge-brand px-3 py-1.5 text-xs rounded-full cursor-pointer hover:bg-indigo-600/25 transition-all">{g} ×</button>
                   ))}
-                  <button className="badge-neutral px-3 py-1.5 text-xs rounded-full hover:bg-white/10">+ Add Goal</button>
+                  <button className="badge-neutral px-3 py-1.5 text-xs rounded-full hover:bg-slate-100">+ Add Goal</button>
                 </div>
               </div>
               <button className="btn-primary text-sm gap-2"><Save className="w-4 h-4" /> Save Changes</button>
@@ -98,8 +98,8 @@ export default function Settings() {
           )}
 
           {activeTab === 'notifications' && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1 divide-y divide-white/5">
-              <h2 className="text-base font-bold text-white font-display mb-3">Notification Preferences</h2>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1 divide-y divide-slate-100">
+              <h2 className="text-base font-bold text-slate-900 font-display mb-3">Notification Preferences</h2>
               <Toggle label="Email Alerts" desc="Receive alerts via email" enabled={notifications.emailAlerts} onChange={() => toggleNotif('emailAlerts')} />
               <Toggle label="Push Notifications" desc="Browser & mobile push notifications" enabled={notifications.pushAlerts} onChange={() => toggleNotif('pushAlerts')} />
               <Toggle label="Price Alerts" desc="Stock price target & stop loss alerts" enabled={notifications.priceAlerts} onChange={() => toggleNotif('priceAlerts')} />
@@ -112,8 +112,8 @@ export default function Settings() {
           )}
 
           {activeTab === 'ai' && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1 divide-y divide-white/5">
-              <h2 className="text-base font-bold text-white font-display mb-3">AI Preferences</h2>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-1 divide-y divide-slate-100">
+              <h2 className="text-base font-bold text-slate-900 font-display mb-3">AI Preferences</h2>
               <Toggle label="Auto Portfolio Analysis" desc="AI analyzes your portfolio daily automatically" enabled={aiPrefs.autoAnalysis} onChange={() => toggleAI('autoAnalysis')} />
               <Toggle label="Risk Warnings" desc="AI warns you when portfolio risk increases" enabled={aiPrefs.riskWarnings} onChange={() => toggleAI('riskWarnings')} />
               <Toggle label="News Integration" desc="AI connects news to your holdings" enabled={aiPrefs.newsIntegration} onChange={() => toggleAI('newsIntegration')} />
@@ -132,17 +132,17 @@ export default function Settings() {
 
           {activeTab === 'security' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
-              <h2 className="text-base font-bold text-white font-display">Security Settings</h2>
+              <h2 className="text-base font-bold text-slate-900 font-display">Security Settings</h2>
               <div className="space-y-4">
-                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3">
-                  <Shield className="w-5 h-5 text-emerald-400" />
+                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-3">
+                  <Shield className="w-5 h-5 text-emerald-600" />
                   <div>
-                    <div className="text-sm font-semibold text-emerald-400">Account is Secure</div>
-                    <div className="text-xs text-slate-400">Last login: Today 9:45 AM · Mumbai, India</div>
+                    <div className="text-sm font-semibold text-emerald-600">Account is Secure</div>
+                    <div className="text-xs text-slate-500">Last login: Today 9:45 AM · Mumbai, India</div>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-white mb-3">Change Password</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 mb-3">Change Password</h3>
                   <div className="space-y-3">
                     <input type="password" placeholder="Current Password" className="input" />
                     <input type="password" placeholder="New Password (min 8 chars)" className="input" />
@@ -150,11 +150,11 @@ export default function Settings() {
                     <button className="btn-primary text-sm"><Key className="w-4 h-4" /> Update Password</button>
                   </div>
                 </div>
-                <div className="pt-3 border-t border-white/5">
-                  <h3 className="text-sm font-semibold text-white mb-3">Two-Factor Authentication</h3>
+                <div className="pt-3 border-t border-slate-100">
+                  <h3 className="text-sm font-semibold text-slate-900 mb-3">Two-Factor Authentication</h3>
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-sm text-slate-300">Authenticator App</div>
+                      <div className="text-sm text-slate-600">Authenticator App</div>
                       <div className="text-xs text-slate-500">Adds an extra layer of security</div>
                     </div>
                     <button className="btn-secondary text-xs">Enable 2FA</button>
@@ -166,14 +166,14 @@ export default function Settings() {
 
           {activeTab === 'appearance' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
-              <h2 className="text-base font-bold text-white font-display">Appearance</h2>
+              <h2 className="text-base font-bold text-slate-900 font-display">Appearance</h2>
               <div>
                 <label className="label">Theme</label>
                 <div className="grid grid-cols-3 gap-3 mt-2">
-                  {[{ icon: <Moon className="w-4 h-4" />, label: 'Dark (Default)', active: true },
-                    { icon: <Sun className="w-4 h-4" />, label: 'Light', active: false },
+                  {[{ icon: <Sun className="w-4 h-4" />, label: 'Light (Default)', active: true },
+                    { icon: <Moon className="w-4 h-4" />, label: 'Dark', active: false },
                     { icon: <Globe className="w-4 h-4" />, label: 'System', active: false }].map(t => (
-                    <button key={t.label} className={`p-3 rounded-xl border text-center transition-all ${t.active ? 'border-brand-500/50 bg-brand-500/10 text-brand-300' : 'border-white/10 text-slate-400 hover:border-white/20'}`}>
+                    <button key={t.label} className={`p-3 rounded-xl border text-center transition-all ${t.active ? 'border-indigo-300 bg-indigo-50 text-indigo-600' : 'border-slate-200 text-slate-500 hover:border-slate-300'}`}>
                       <div className="flex justify-center mb-1">{t.icon}</div>
                       <div className="text-xs">{t.label}</div>
                     </button>
@@ -184,7 +184,7 @@ export default function Settings() {
                 <label className="label">Accent Color</label>
                 <div className="flex gap-2 mt-2">
                   {['#667eea', '#10b981', '#f59e0b', '#f43f5e', '#06b6d4', '#8b5cf6'].map(c => (
-                    <button key={c} className="w-7 h-7 rounded-full border-2 border-transparent hover:border-white/50 transition-all"
+                    <button key={c} className="w-7 h-7 rounded-full border-2 border-transparent hover:border-slate-1000 transition-all"
                       style={{ background: c }} />
                   ))}
                 </div>

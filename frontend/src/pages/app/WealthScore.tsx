@@ -6,11 +6,11 @@ import { aiApi } from '@/api/market.api';
 import toast from 'react-hot-toast';
 
 const LEVELS = [
-  { name: 'Beginner',      range: '0–199',   icon: '🌱', color: 'text-slate-400',   min: 0   },
-  { name: 'Learner',       range: '200–399',  icon: '📚', color: 'text-blue-400',    min: 200 },
-  { name: 'Investor',      range: '400–599',  icon: '📈', color: 'text-emerald-400', min: 400 },
-  { name: 'Wealth Builder',range: '600–799',  icon: '🏆', color: 'text-amber-400',   min: 600 },
-  { name: 'Elite Investor',range: '800–1000', icon: '💎', color: 'text-violet-400',  min: 800 },
+  { name: 'Beginner',      range: '0–199',   icon: '🌱', color: 'text-slate-500',   min: 0   },
+  { name: 'Learner',       range: '200–399',  icon: '📚', color: 'text-blue-600',    min: 200 },
+  { name: 'Investor',      range: '400–599',  icon: '📈', color: 'text-emerald-600', min: 400 },
+  { name: 'Wealth Builder',range: '600–799',  icon: '🏆', color: 'text-amber-600',   min: 600 },
+  { name: 'Elite Investor',range: '800–1000', icon: '💎', color: 'text-violet-600',  min: 800 },
 ];
 
 const getLevelInfo = (score: number) =>
@@ -101,8 +101,8 @@ export default function WealthScore() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
-        <h1 className="text-2xl font-black font-display text-white">Wealth Score</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Your AI-powered financial health rating — calculated from real portfolio data</p>
+        <h1 className="text-2xl font-black font-display text-slate-900">Wealth Score</h1>
+        <p className="text-slate-500 text-sm mt-0.5">Your AI-powered financial health rating — calculated from real portfolio data</p>
       </div>
 
       {/* Score Display */}
@@ -111,7 +111,7 @@ export default function WealthScore() {
         <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-accent-violet/5" />
         <div className="relative">
           {loading
-            ? <div className="w-40 h-40 mx-auto rounded-full bg-white/5 animate-pulse mb-6" />
+            ? <div className="w-40 h-40 mx-auto rounded-full bg-slate-50 animate-pulse mb-6" />
             : (
               <div className="relative w-40 h-40 mx-auto mb-6">
                 <svg viewBox="0 0 160 160" className="w-full h-full -rotate-90">
@@ -132,15 +132,15 @@ export default function WealthScore() {
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <div className="text-4xl font-black font-display gradient-text-gold">{score}</div>
-                  <div className="text-xs text-slate-400">/ 1000</div>
+                  <div className="text-xs text-slate-500">/ 1000</div>
                 </div>
               </div>
             )
           }
           {!loading && (
             <>
-              <div className="text-2xl font-bold text-amber-400 mb-1">{level.icon} {level.name}</div>
-              <p className="text-sm text-slate-400 mb-4">
+              <div className="text-2xl font-bold text-amber-600 mb-1">{level.icon} {level.name}</div>
+              <p className="text-sm text-slate-500 mb-4">
                 {p ? `Based on ${p.assets?.length || 0} holdings with ${(p.returnsPercent||0).toFixed(1)}% returns` : 'Add a portfolio to see your score'}
               </p>
               <div className="text-xs text-slate-500 mb-2">Progress to {next.name} ({next.min} pts)</div>
@@ -157,12 +157,12 @@ export default function WealthScore() {
       {/* Score Breakdown */}
       {breakdown.length > 0 && (
         <div className="card-static p-5">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">Score Breakdown</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Score Breakdown</h3>
           <div className="space-y-4">
             {breakdown.map(b => (
               <div key={b.label}>
                 <div className="flex justify-between text-xs mb-1.5">
-                  <span className="text-slate-400">{b.icon} {b.label}</span>
+                  <span className="text-slate-500">{b.icon} {b.label}</span>
                   <span className="font-bold font-numeric" style={{ color: b.color }}>{b.score} / {b.max}</span>
                 </div>
                 <div className="progress-bar">
@@ -182,8 +182,8 @@ export default function WealthScore() {
       <div className="card-static p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-sm font-bold text-white font-display">🩺 AI Portfolio Doctor</h3>
-            <p className="text-xs text-slate-400 mt-0.5">Get a comprehensive AI diagnosis of your portfolio</p>
+            <h3 className="text-sm font-bold text-slate-900 font-display">🩺 AI Portfolio Doctor</h3>
+            <p className="text-xs text-slate-500 mt-0.5">Get a comprehensive AI diagnosis of your portfolio</p>
           </div>
           <button onClick={handleAnalyze} disabled={analyzing || !p}
             className="btn-primary text-sm gap-2 disabled:opacity-50">
@@ -194,38 +194,38 @@ export default function WealthScore() {
 
         {analysis && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-            <p className="text-sm text-slate-300 leading-relaxed">{analysis.summary}</p>
+            <p className="text-sm text-slate-700 leading-relaxed">{analysis.summary}</p>
             <div className="grid md:grid-cols-2 gap-4">
               {analysis.strengths?.length > 0 && (
-                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                  <h4 className="text-xs font-bold text-emerald-400 mb-2">✅ Strengths</h4>
+                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+                  <h4 className="text-xs font-bold text-emerald-600 mb-2">✅ Strengths</h4>
                   <ul className="space-y-1">
-                    {analysis.strengths.map((s: string, i: number) => <li key={i} className="text-xs text-slate-300">• {s}</li>)}
+                    {analysis.strengths.map((s: string, i: number) => <li key={i} className="text-xs text-slate-700">• {s}</li>)}
                   </ul>
                 </div>
               )}
               {analysis.weaknesses?.length > 0 && (
-                <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20">
-                  <h4 className="text-xs font-bold text-rose-400 mb-2">⚠️ Weaknesses</h4>
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+                  <h4 className="text-xs font-bold text-red-500 mb-2">⚠️ Weaknesses</h4>
                   <ul className="space-y-1">
-                    {analysis.weaknesses.map((w: string, i: number) => <li key={i} className="text-xs text-slate-300">• {w}</li>)}
+                    {analysis.weaknesses.map((w: string, i: number) => <li key={i} className="text-xs text-slate-700">• {w}</li>)}
                   </ul>
                 </div>
               )}
             </div>
             {analysis.suggestions?.length > 0 && (
-              <div className="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20">
-                <h4 className="text-xs font-bold text-brand-400 mb-2">💡 Suggested Improvements</h4>
+              <div className="p-4 rounded-xl bg-indigo-50 border border-indigo-200">
+                <h4 className="text-xs font-bold text-indigo-600 mb-2">💡 Suggested Improvements</h4>
                 <div className="space-y-2">
                   {analysis.suggestions.map((s: any, i: number) => (
                     <div key={i} className="flex items-start gap-2">
                       <span className={`text-2xs px-1.5 py-0.5 rounded-full font-bold flex-shrink-0 mt-0.5 ${
-                        s.priority === 'High' ? 'bg-rose-500/20 text-rose-400' :
-                        s.priority === 'Medium' ? 'bg-amber-500/20 text-amber-400' : 'bg-emerald-500/20 text-emerald-400'
+                        s.priority === 'High' ? 'bg-red-100 text-red-500' :
+                        s.priority === 'Medium' ? 'bg-amber-100 text-amber-600' : 'bg-emerald-100 text-emerald-600'
                       }`}>{s.priority || 'Low'}</span>
                       <div>
-                        <p className="text-xs text-white font-medium">{typeof s === 'string' ? s : s.action}</p>
-                        {s.impact && <p className="text-2xs text-slate-400 mt-0.5">{s.impact}</p>}
+                        <p className="text-xs text-slate-900 font-medium">{typeof s === 'string' ? s : s.action}</p>
+                        {s.impact && <p className="text-2xs text-slate-500 mt-0.5">{s.impact}</p>}
                       </div>
                     </div>
                   ))}
@@ -241,12 +241,12 @@ export default function WealthScore() {
 
       {/* Badges */}
       <div className="card-static p-5">
-        <h3 className="text-sm font-bold text-white mb-4 font-display">Achievement Badges</h3>
+        <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Achievement Badges</h3>
         <div className="grid grid-cols-3 gap-3">
           {badges.map(badge => (
-            <div key={badge} className="flex items-center gap-2 p-3 rounded-xl bg-white/5 border border-white/8">
+            <div key={badge} className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-lg">{badge.split(' ')[0]}</span>
-              <span className="text-xs text-slate-300 font-medium">{badge.split(' ').slice(1).join(' ')}</span>
+              <span className="text-xs text-slate-700 font-medium">{badge.split(' ').slice(1).join(' ')}</span>
             </div>
           ))}
         </div>
@@ -255,12 +255,12 @@ export default function WealthScore() {
       {/* Suggestions */}
       {suggestions.length > 0 && (
         <div className="card-static p-5">
-          <h3 className="text-sm font-bold text-white mb-4 font-display">💡 How to Improve Your Score</h3>
+          <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">💡 How to Improve Your Score</h3>
           <div className="space-y-3">
             {suggestions.map((s, i) => (
-              <div key={i} className="flex gap-3 p-3 rounded-xl bg-white/5">
-                <span className="text-brand-400 font-bold text-sm">{i + 1}.</span>
-                <p className="text-xs text-slate-300 leading-relaxed">{s}</p>
+              <div key={i} className="flex gap-3 p-3 rounded-xl bg-slate-50">
+                <span className="text-indigo-600 font-bold text-sm">{i + 1}.</span>
+                <p className="text-xs text-slate-700 leading-relaxed">{s}</p>
               </div>
             ))}
           </div>
@@ -269,12 +269,12 @@ export default function WealthScore() {
 
       {/* Level Ladder */}
       <div className="card-static p-5">
-        <h3 className="text-sm font-bold text-white mb-4 font-display">Investor Levels</h3>
+        <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Investor Levels</h3>
         <div className="space-y-2">
           {LEVELS.map(l => {
             const isActive = l.name === level.name;
             return (
-              <div key={l.name} className={`flex items-center gap-3 p-3 rounded-xl ${isActive ? 'bg-amber-500/10 border border-amber-500/20' : 'opacity-50'}`}>
+              <div key={l.name} className={`flex items-center gap-3 p-3 rounded-xl ${isActive ? 'bg-amber-50 border border-amber-200' : 'opacity-50'}`}>
                 <span className="text-xl">{l.icon}</span>
                 <div className="flex-1">
                   <div className={`text-sm font-semibold ${l.color}`}>{l.name}</div>

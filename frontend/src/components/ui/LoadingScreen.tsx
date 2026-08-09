@@ -7,10 +7,10 @@ interface LoadingScreenProps {
 
 export default function LoadingScreen({ message = 'Loading InvestIQ AI...' }: LoadingScreenProps) {
   return (
-    <div className="fixed inset-0 bg-dark-950 flex flex-col items-center justify-center z-50">
-      {/* Background glow */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-brand-500/5 blur-3xl animate-pulse-slow" />
+    <div className="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
+      {/* Soft background accent */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-indigo-100/60 blur-3xl" />
       </div>
 
       <motion.div
@@ -24,22 +24,22 @@ export default function LoadingScreen({ message = 'Loading InvestIQ AI...' }: Lo
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            className="absolute -inset-3 rounded-full border border-brand-500/20"
+            className="absolute -inset-3 rounded-full border border-indigo-200"
           />
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
-            className="absolute -inset-6 rounded-full border border-accent-violet/10"
+            className="absolute -inset-6 rounded-full border border-indigo-100"
           />
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center shadow-glow">
-            <TrendingUp className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg">
+            <TrendingUp className="w-8 h-8 text-slate-900" />
           </div>
         </div>
 
         {/* Brand */}
         <div className="text-center">
-          <h2 className="text-2xl font-black font-display gradient-text">InvestIQ AI</h2>
-          <p className="text-xs text-slate-500 mt-1">{message}</p>
+          <h2 className="text-2xl font-black text-indigo-600" style={{ fontFamily: 'Outfit, sans-serif' }}>InvestIQ AI</h2>
+          <p className="text-sm text-slate-500 mt-1">{message}</p>
         </div>
 
         {/* Progress dots */}
@@ -47,7 +47,7 @@ export default function LoadingScreen({ message = 'Loading InvestIQ AI...' }: Lo
           {[0, 1, 2].map(i => (
             <motion.div
               key={i}
-              className="w-2 h-2 rounded-full bg-brand-500"
+              className="w-2 h-2 rounded-full bg-indigo-500"
               animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] }}
               transition={{ duration: 1.2, delay: i * 0.2, repeat: Infinity }}
             />

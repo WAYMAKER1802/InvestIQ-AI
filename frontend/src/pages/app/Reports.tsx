@@ -10,17 +10,17 @@ const reports = [
 ];
 
 const statusIcon = (status: string) => {
-  if (status === 'ready') return <CheckCircle className="w-4 h-4 text-emerald-400" />;
-  if (status === 'generating') return <Clock className="w-4 h-4 text-amber-400 animate-spin" />;
-  return <AlertCircle className="w-4 h-4 text-rose-400" />;
+  if (status === 'ready') return <CheckCircle className="w-4 h-4 text-emerald-600" />;
+  if (status === 'generating') return <Clock className="w-4 h-4 text-amber-600 animate-spin" />;
+  return <AlertCircle className="w-4 h-4 text-red-500" />;
 };
 
 const typeColors: Record<string, string> = {
-  portfolio_analysis: 'bg-brand-500/15 text-brand-400',
+  portfolio_analysis: 'bg-indigo-600/15 text-indigo-600',
   weekly_digest     : 'bg-cyan-500/15 text-cyan-400',
-  risk_assessment   : 'bg-rose-500/15 text-rose-400',
-  goal_progress     : 'bg-emerald-500/15 text-emerald-400',
-  tax_report        : 'bg-amber-500/15 text-amber-400',
+  risk_assessment   : 'bg-rose-500/15 text-red-500',
+  goal_progress     : 'bg-emerald-500/15 text-emerald-600',
+  tax_report        : 'bg-amber-500/15 text-amber-600',
 };
 
 export default function Reports() {
@@ -28,8 +28,8 @@ export default function Reports() {
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black font-display text-white">AI Reports</h1>
-          <p className="text-slate-400 text-sm mt-0.5">Auto-generated portfolio analysis documents</p>
+          <h1 className="text-2xl font-black font-display text-slate-900">AI Reports</h1>
+          <p className="text-slate-500 text-sm mt-0.5">Auto-generated portfolio analysis documents</p>
         </div>
         <button className="btn-primary text-sm gap-2">
           <Plus className="w-4 h-4" /> Generate Report
@@ -42,11 +42,11 @@ export default function Reports() {
           <motion.div key={r.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.07 }}
             className="card-static flex items-center gap-4 p-4 hover:border-white/15 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
-              <FileText className="w-5 h-5 text-slate-400" />
+            <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center flex-shrink-0">
+              <FileText className="w-5 h-5 text-slate-500" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-sm font-semibold text-white truncate">{r.title}</h3>
+              <h3 className="text-sm font-semibold text-slate-900 truncate">{r.title}</h3>
               <div className="flex items-center gap-3 mt-1">
                 <span className={`badge text-2xs ${typeColors[r.type] || 'badge-neutral'}`}>{r.type.replace(/_/g, ' ')}</span>
                 <span className="text-2xs text-slate-500">{r.date}</span>
@@ -61,9 +61,9 @@ export default function Reports() {
                 </button>
               )}
               {r.status === 'generating' && (
-                <span className="text-2xs text-amber-400 font-medium">Generating...</span>
+                <span className="text-2xs text-amber-600 font-medium">Generating...</span>
               )}
-              <button className="btn-icon p-1.5"><Trash2 className="w-3.5 h-3.5 text-slate-600 hover:text-rose-400" /></button>
+              <button className="btn-icon p-1.5"><Trash2 className="w-3.5 h-3.5 text-slate-600 hover:text-red-500" /></button>
             </div>
           </motion.div>
         ))}

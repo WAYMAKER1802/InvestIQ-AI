@@ -93,11 +93,11 @@ export default function LoginPage() {
     return (
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
         <div className="mb-8 text-center">
-          <div className="w-16 h-16 bg-brand-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-500/30">
-            <ShieldCheck className="w-8 h-8 text-brand-400" />
+          <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-indigo-100">
+            <ShieldCheck className="w-8 h-8 text-indigo-600" />
           </div>
-          <h1 className="text-3xl font-black font-display text-white mb-2">Enter mPIN</h1>
-          <p className="text-slate-400 text-sm">Enter your 4-digit security PIN to continue</p>
+          <h1 className="text-3xl font-black text-slate-900 mb-2" style={{ fontFamily: 'Outfit, sans-serif' }}>Enter mPIN</h1>
+          <p className="text-slate-500 text-sm">Enter your 4-digit security PIN to continue</p>
         </div>
 
         <div className="flex justify-center gap-4 mb-8">
@@ -110,7 +110,7 @@ export default function LoginPage() {
               value={digit}
               onChange={(e) => handlePinChange(i, e.target.value)}
               onKeyDown={(e) => handlePinKeyDown(i, e)}
-              className="w-14 h-14 text-center text-2xl font-bold bg-dark-800 border border-white/10 rounded-xl text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
+              className="w-14 h-14 text-center text-2xl font-bold bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all"
             />
           ))}
         </div>
@@ -129,7 +129,7 @@ export default function LoginPage() {
 
         <button 
           onClick={() => { setStep(1); setPin(['','','','']); setTempToken(null); }}
-          className="text-xs text-slate-400 hover:text-white w-full text-center transition-colors"
+          className="text-xs text-slate-500 hover:text-indigo-600 w-full text-center transition-colors"
         >
           Back to Login
         </button>
@@ -144,8 +144,8 @@ export default function LoginPage() {
       transition={{ duration: 0.5 }}
     >
       <div className="mb-8">
-        <h1 className="text-3xl font-black font-display text-white mb-2">Welcome back</h1>
-        <p className="text-slate-400 text-sm">Sign in to your InvestIQ AI account</p>
+        <h1 className="text-3xl font-black text-slate-900 mb-2" style={{ fontFamily: 'Outfit, sans-serif' }}>Welcome back</h1>
+        <p className="text-slate-500 text-sm">Sign in to your InvestIQ AI account</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
@@ -163,14 +163,14 @@ export default function LoginPage() {
               className={`input pl-10 ${errors.email ? 'border-rose-500/60' : ''}`}
             />
           </div>
-          {errors.email && <p className="text-xs text-rose-400 mt-1">{errors.email.message}</p>}
+          {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
         </div>
 
         {/* Password */}
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label className="label mb-0">Password</label>
-            <Link to="/forgot-password" className="text-xs text-brand-400 hover:text-brand-300 transition-colors">
+            <Link to="/forgot-password" className="text-xs text-indigo-600 hover:text-indigo-800 transition-colors">
               Forgot password?
             </Link>
           </div>
@@ -185,11 +185,11 @@ export default function LoginPage() {
               className={`input pl-10 pr-10 ${errors.password ? 'border-rose-500/60' : ''}`}
             />
             <button type="button" onClick={() => setShowPass(!showPass)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600">
               {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
-          {errors.password && <p className="text-xs text-rose-400 mt-1">{errors.password.message}</p>}
+          {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>}
         </div>
 
         {/* Submit */}
@@ -210,7 +210,7 @@ export default function LoginPage() {
       {/* Divider */}
       <div className="my-6 flex items-center gap-3">
         <div className="flex-1 divider" />
-        <span className="text-xs text-slate-600">or continue with</span>
+        <span className="text-xs text-slate-500">or continue with</span>
         <div className="flex-1 divider" />
       </div>
 
@@ -235,7 +235,7 @@ export default function LoginPage() {
             toast.error('Google Sign-in was unsuccessful or cancelled.');
           }}
           useOneTap
-          theme="filled_black"
+          theme="outline"
           shape="circle"
           width="100%"
           text="continue_with"
@@ -245,7 +245,7 @@ export default function LoginPage() {
       {/* Sign up link */}
       <p className="text-center text-sm text-slate-500 mt-6">
         Don't have an account?{' '}
-        <Link to="/register" className="text-brand-400 hover:text-brand-300 font-medium transition-colors">
+        <Link to="/register" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors">
           Create one free
         </Link>
       </p>

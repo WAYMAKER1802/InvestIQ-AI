@@ -67,14 +67,14 @@ export default function Analytics() {
     <div className="space-y-6 max-w-screen-2xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black font-display text-white">Portfolio Analytics</h1>
-          <p className="text-slate-400 text-sm mt-0.5">Deep performance analysis vs. benchmarks · {p?.name || 'No portfolio selected'}</p>
+          <h1 className="text-2xl font-black font-display text-slate-900">Portfolio Analytics</h1>
+          <p className="text-slate-500 text-sm mt-0.5">Deep performance analysis vs. benchmarks · {p?.name || 'No portfolio selected'}</p>
         </div>
         <div className="flex gap-2">
           {['1M','3M','6M','1Y','ALL'].map(t => (
             <button key={t} onClick={() => setPeriod(t)}
               className={`text-xs px-2.5 py-1 rounded-lg transition-all ${
-                t === period ? 'bg-brand-500/20 text-brand-400 border border-brand-500/30' : 'text-slate-500 hover:text-white'
+                t === period ? 'bg-indigo-600/20 text-indigo-600 border border-brand-500/30' : 'text-slate-500 hover:text-slate-900'
               }`}>{t}</button>
           ))}
         </div>
@@ -88,7 +88,7 @@ export default function Analytics() {
       )}
 
       {loading && (
-        <div className="card-static p-12 flex items-center justify-center gap-3 text-slate-400">
+        <div className="card-static p-12 flex items-center justify-center gap-3 text-slate-500">
           <Loader2 className="w-5 h-5 animate-spin" /> Loading analytics…
         </div>
       )}
@@ -101,7 +101,7 @@ export default function Analytics() {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                 className="stat-card">
                 <p className="stat-label">{m.label}</p>
-                <p className={`text-xl font-bold font-numeric mt-1 ${m.good ? 'text-emerald-400' : 'text-white'}`}>{m.value}</p>
+                <p className={`text-xl font-bold font-numeric mt-1 ${m.good ? 'text-emerald-600' : 'text-slate-900'}`}>{m.value}</p>
                 <p className="text-2xs text-slate-500 mt-1">{m.vs}</p>
               </motion.div>
             ))}
@@ -111,7 +111,7 @@ export default function Analytics() {
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Portfolio Growth */}
             <div className="card-static p-5">
-              <h3 className="text-sm font-bold text-white mb-4 font-display">Portfolio Growth (₹ in Lakhs)</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Portfolio Growth (₹ in Lakhs)</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <AreaChart data={history.length > 0 ? history : monthlyReturns}>
                   <defs>
@@ -131,7 +131,7 @@ export default function Analytics() {
 
             {/* Monthly Returns */}
             <div className="card-static p-5">
-              <h3 className="text-sm font-bold text-white mb-4 font-display">Monthly Returns vs. Nifty 50</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Monthly Returns vs. Nifty 50</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={monthlyReturns} barGap={2}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
@@ -156,7 +156,7 @@ export default function Analytics() {
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Radar */}
             <div className="card-static p-5">
-              <h3 className="text-sm font-bold text-white mb-4 font-display">Portfolio Scorecard vs. Benchmark</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Portfolio Scorecard vs. Benchmark</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <RadarChart data={radar}>
                   <PolarGrid stroke="rgba(255,255,255,0.05)" />
@@ -168,19 +168,19 @@ export default function Analytics() {
                 </RadarChart>
               </ResponsiveContainer>
               <div className="flex gap-4 justify-center mt-2">
-                <div className="flex items-center gap-2 text-xs text-slate-400"><span className="w-3 h-0.5 bg-brand-500 rounded" />Your Portfolio</div>
-                <div className="flex items-center gap-2 text-xs text-slate-400"><span className="w-3 h-0.5 bg-emerald-500 rounded" />Benchmark</div>
+                <div className="flex items-center gap-2 text-xs text-slate-500"><span className="w-3 h-0.5 bg-indigo-600 rounded" />Your Portfolio</div>
+                <div className="flex items-center gap-2 text-xs text-slate-500"><span className="w-3 h-0.5 bg-emerald-500 rounded" />Benchmark</div>
               </div>
             </div>
 
             {/* Sector */}
             <div className="card-static p-5">
-              <h3 className="text-sm font-bold text-white mb-4 font-display">Sector Contribution</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-display">Sector Contribution</h3>
               {sectorPerf.length > 0 ? (
                 <div className="space-y-3">
                   {sectorPerf.map((s: any) => (
                     <div key={s.sector} className="flex items-center gap-4">
-                      <div className="w-20 text-xs text-slate-400 truncate">{s.sector}</div>
+                      <div className="w-20 text-xs text-slate-500 truncate">{s.sector}</div>
                       <div className="flex-1">
                         <div className="progress-bar h-2">
                           <div className="progress-fill" style={{
@@ -189,7 +189,7 @@ export default function Analytics() {
                           }} />
                         </div>
                       </div>
-                      <div className={`w-16 text-right text-xs font-bold font-numeric ${(s.returns||0) >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                      <div className={`w-16 text-right text-xs font-bold font-numeric ${(s.returns||0) >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                         {(s.returns||0) >= 0 ? '+' : ''}{(s.returns||s.percentage||0).toFixed(1)}%
                       </div>
                       <div className="w-14 text-right text-xs text-slate-500">{(s.weight||s.percentage||0).toFixed(0)}% wt.</div>

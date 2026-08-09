@@ -68,10 +68,10 @@ export default function Invest() {
       
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-black font-display text-white flex items-center gap-2">
-          <ShoppingBag className="w-6 h-6 text-brand-400" /> Investment Marketplace
+        <h1 className="text-2xl font-black font-display text-slate-900 flex items-center gap-2">
+          <ShoppingBag className="w-6 h-6 text-indigo-600" /> Investment Marketplace
         </h1>
-        <p className="text-slate-400 text-sm mt-0.5">Discover and invest in top Indian assets.</p>
+        <p className="text-slate-500 text-sm mt-0.5">Discover and invest in top Indian assets.</p>
       </div>
 
       {/* Search Bar */}
@@ -97,21 +97,21 @@ export default function Invest() {
           >
             <div>
               <div className="flex justify-between items-start mb-2">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center font-bold text-white shadow-inner">
+                <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center font-bold text-slate-900 shadow-inner">
                   {asset.symbol.slice(0, 2)}
                 </div>
-                <span className={`badge border ${asset.change >= 0 ? 'text-emerald-400 border-emerald-500/20 bg-emerald-500/10' : 'text-rose-400 border-rose-500/20 bg-rose-500/10'}`}>
+                <span className={`badge border ${asset.change >= 0 ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 'text-red-500 border-red-200 bg-red-50'}`}>
                   {asset.change >= 0 ? '▲' : '▼'} {Math.abs(asset.change)}%
                 </span>
               </div>
-              <h3 className="font-bold text-white text-lg font-display truncate">{asset.symbol}</h3>
-              <p className="text-xs text-slate-400 truncate mb-4">{asset.name}</p>
+              <h3 className="font-bold text-slate-900 text-lg font-display truncate">{asset.symbol}</h3>
+              <p className="text-xs text-slate-500 truncate mb-4">{asset.name}</p>
             </div>
             
-            <div className="flex items-end justify-between mt-auto pt-4 border-t border-white/5">
+            <div className="flex items-end justify-between mt-auto pt-4 border-t border-slate-100">
               <div>
                 <div className="text-xs text-slate-500 mb-0.5">Live Price</div>
-                <div className="font-numeric font-bold text-lg text-white">₹{asset.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                <div className="font-numeric font-bold text-lg text-slate-900">₹{asset.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
               </div>
               <button className="btn-primary text-xs px-4 py-1.5 rounded-lg shadow-glow">
                 Invest
@@ -140,27 +140,27 @@ export default function Invest() {
               className="card-static p-0 w-full max-w-sm relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-500 to-accent-violet" />
-              <button onClick={() => setSelectedAsset(null)} className="absolute top-4 right-4 text-slate-500 hover:text-white z-10"><X className="w-5 h-5" /></button>
+              <button onClick={() => setSelectedAsset(null)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-900 z-10"><X className="w-5 h-5" /></button>
               
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500/20 to-accent-violet/20 border border-brand-500/30 flex items-center justify-center font-bold text-white text-lg">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500/20 to-accent-violet/20 border border-brand-500/30 flex items-center justify-center font-bold text-slate-900 text-lg">
                     {selectedAsset.symbol.slice(0, 2)}
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-white font-display leading-tight">{selectedAsset.symbol}</h2>
-                    <p className="text-xs text-slate-400">{selectedAsset.name}</p>
+                    <h2 className="text-xl font-bold text-slate-900 font-display leading-tight">{selectedAsset.symbol}</h2>
+                    <p className="text-xs text-slate-500">{selectedAsset.name}</p>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 mb-6 flex justify-between items-center">
-                  <span className="text-sm text-slate-400">Current Market Price</span>
-                  <span className="text-lg font-numeric font-bold text-white">₹{selectedAsset.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 mb-6 flex justify-between items-center">
+                  <span className="text-sm text-slate-500">Current Market Price</span>
+                  <span className="text-lg font-numeric font-bold text-slate-900">₹{selectedAsset.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                 </div>
 
                 <form onSubmit={handlePurchase} className="space-y-6">
                   <div>
-                    <label className="text-xs text-slate-400 mb-2 block">Quantity to Buy</label>
+                    <label className="text-xs text-slate-500 mb-2 block">Quantity to Buy</label>
                     <input 
                       type="number" 
                       min="1"
@@ -172,10 +172,10 @@ export default function Invest() {
                     />
                   </div>
 
-                  <div className="flex justify-between items-end border-t border-white/10 pt-4">
+                  <div className="flex justify-between items-end border-t border-slate-200 pt-4">
                     <div>
                       <div className="text-xs text-slate-500 mb-1">Total Estimated Cost</div>
-                      <div className="text-2xl font-numeric font-black text-brand-400 shadow-glow">
+                      <div className="text-2xl font-numeric font-black text-indigo-600 shadow-glow">
                         ₹{((parseFloat(quantity) || 0) * selectedAsset.price).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
                       </div>
                     </div>
@@ -190,7 +190,7 @@ export default function Invest() {
                   </button>
                   
                   {!activePortfolio && (
-                    <p className="text-xs text-rose-400 text-center mt-2">
+                    <p className="text-xs text-red-500 text-center mt-2">
                       Please create a portfolio first to invest.
                     </p>
                   )}

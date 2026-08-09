@@ -18,10 +18,10 @@ export default function Button({
   const baseStyles = "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
   
   const variants = {
-    primary: "bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20",
-    secondary: "bg-slate-800 hover:bg-slate-700 text-white",
-    outline: "border-2 border-slate-700 hover:border-slate-600 text-white bg-transparent",
-    danger: "bg-rose-500 hover:bg-rose-600 text-white shadow-lg shadow-rose-500/20",
+    primary: "bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-600/20",
+    secondary: "bg-slate-100 hover:bg-slate-200 text-slate-900",
+    outline: "border border-slate-200 hover:border-slate-300 text-slate-700 bg-transparent",
+    danger: "bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/20",
   };
 
   const sizes = {
